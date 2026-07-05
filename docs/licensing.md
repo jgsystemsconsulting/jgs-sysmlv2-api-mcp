@@ -6,7 +6,7 @@
 whose authoring capability is unlocked by a licence file. This page covers the
 product licence. It does not change the source code's own terms (below).
 
-## Source code vs. product licence — two different things
+## Source code vs. product licence: two different things
 
 - **The source code** in this repository is proprietary and confidential,
   copyright JG Systems Consulting Ltd. No license, express or implied, is
@@ -20,11 +20,11 @@ product licence. It does not change the source code's own terms (below).
 
 ## Tiers
 
-- **FREE** — no licence file needed. All read/navigation tools work
+- **FREE**: no licence file needed. All read/navigation tools work
   out of the box: browsing a model, querying elements, listing commits,
   branches, and tags, and so on.
 - **PRO** (also **ENTERPRISE** and **ACADEMIC**, functionally identical to PRO
-  at launch — only pricing/terms differ) — unlocks the 15 gated authoring
+  at launch, only pricing/terms differ) unlocks the 15 gated authoring
   tools: `create_element`, `modify_element`, `delete_element`,
   `delete_subtree`, `create_relationship`, `move_element`, `stage_batch`,
   `commit_changes`, `create_branch`, `delete_branch`, `merge_branch`,
@@ -44,7 +44,7 @@ a valid PRO-or-above licence.
   3. `~/.jgs-sysmlv2-api/`.
 
   A stale or invalid file at a higher-precedence location **shadows** a valid
-  one lower down — the search does not fall through past the first file it
+  one lower down: the search does not fall through past the first file it
   finds, it selects that file and reports whatever reason it failed
   verification for. Use the `get_licence` tool (below) to see which file
   actually loaded.
