@@ -1,6 +1,6 @@
 [project]
 name = "jgs-sysmlv2-api-mcp"
-version = "1.0.0"
+version = "1.0.1"
 description = "Proprietary MCP server for the OMG SysML v2 REST API (staged-commit authoring)."
 requires-python = ">=3.11"
 dependencies = [

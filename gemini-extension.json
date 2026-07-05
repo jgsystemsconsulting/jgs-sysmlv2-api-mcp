@@ -1,6 +1,6 @@
 {
   "name": "jgs-sysmlv2-api-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for the OMG SysML v2 REST API. Navigate, version, and author SysML v2 models from Gemini CLI, with staged, token-confirmed commits. Requires a reachable SysML v2 API endpoint.",
   "mcpServers": {
     "jgs-sysmlv2": {

@@ -6,6 +6,20 @@ All notable changes to jgs-sysmlv2-api-mcp are documented here. The format
 follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the
 project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-07-05
+
+### Added
+- Host-native plugin manifests for Cursor (`.cursor-plugin/`), OpenAI Codex CLI
+  (`.agents/plugins/marketplace.json`), and Gemini CLI (`gemini-extension.json`),
+  alongside the existing Claude Code manifest, so the server is discoverable and
+  installable from all four mainstream coding-agent hosts.
+
+### Changed
+- The release payload no longer ships the `tests/` directory or the
+  `pytest`/`nuitka` dev dependencies; customers install via `pip` and don't run
+  the internal test suite. CI in the release repo now installs runtime deps and
+  runs only the release gate.
+
 ## [1.0.0] - 2026-07-03
 
 First full release: the complete 35-tool v1 surface.
