@@ -1,0 +1,8 @@
+{
+  "name": "jgs-sysmlv2-api-mcp",
+  "owner": {"name": "JG Systems Consulting Ltd"},
+  "plugins": [
+    {"name": "jgs-sysmlv2-api-mcp", "source": ".",
+     "description": "Read and write live SysML v2 models through the OMG Systems Modeling API, with staged, token-confirmed commits."}
+  ]
+}

@@ -1,0 +1,24 @@
+# jgs-sysmlv2-api-mcp is a LOCAL stdio MCP server that talks to the user's
+# own SysML v2 API endpoint. It cannot be Smithery-hosted; this manifest is
+# the local-launch descriptor.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required: [SYSMLV2_BASE_URL, SYSMLV2_PROJECT]
+    properties:
+      SYSMLV2_BASE_URL:
+        type: string
+        description: SysML v2 API endpoint (HTTPS, or http:// for loopback only)
+      SYSMLV2_TOKEN:
+        type: string
+        description: Bearer token (optional against an open local pilot)
+      SYSMLV2_PROJECT:
+        type: string
+        description: Project UUID the write buffer binds to
+  commandFunction: |-
+    (config) => ({
+      command: "python",
+      args: ["-m", "jgs_sysmlv2_api_mcp"],
+      env: config
+    })

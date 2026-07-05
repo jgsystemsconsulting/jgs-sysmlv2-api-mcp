@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "jgs-sysmlv2-api-mcp"
+version: 1.0.0
+date-released: "2026-07-03"
+authors:
+  - name: "JG Systems Consulting Ltd"
+repository-code: "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp"
+url: "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp"
+license: LicenseRef-JGSC-Proprietary

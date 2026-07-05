@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tool Reference: jgs-sysmlv2-api-mcp, all 35 MCP Tools</title>
+<meta name="description" content="Browsable reference for all 35 MCP tools in jgs-sysmlv2-api-mcp: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/tool-reference.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tool Reference: jgs-sysmlv2-api-mcp">
+<meta property="og:description" content="Browsable reference for all 35 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/tool-reference.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tool Reference: jgs-sysmlv2-api-mcp">
+<meta name="twitter:description" content="Browsable reference for all 35 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<style>
+/* Shared design tokens/components for docs/index.html and docs/tool-reference.html.
+   Source of truth for both pages' visual system (RR-B-20/24). Theme: "engineering
+   drafting document" per ~/.claude/skills/release-repo-standard/references/design-system.md. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/jetbrains-mono-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/inter-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/inter-600.woff2') format('woff2');
+}
+
+:root {
+  --ink:   #0a0a0b; --ink-2: #111113; --ink-3: #16171a; --ink-4: #1e2024;
+  --line:  #2a2d33; --line-2: #3a3e46;
+  --mute:  #767b80; --mute-2: #8b9099;
+  --text:  #c7ccd3; --text-hi: #e8ebf0;
+  --paper: #f4f2ec; --paper-ink: #0a0a0b;
+  --accent: #7db8ff;
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --pad-x: clamp(24px, 4vw, 80px);
+  --pad-section: clamp(48px, 6vw, 96px);
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--paper); color: var(--paper-ink);
+  padding: 12px 20px; font-family: var(--mono); font-weight: 700;
+}
+.skip-link:focus { left: var(--pad-x); top: 12px; }
+
+a { color: var(--text-hi); }
+a:hover { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--ink-3);
+  border: 1px solid var(--line);
+  padding: 0.1em 0.4em;
+}
+pre {
+  font-family: var(--mono);
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  padding: 20px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+pre code { background: none; border: none; padding: 0; }
+
+h1, h2, h3 {
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-hi);
+  margin: 0 0 0.5em;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.15; }
+h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
+
+.eyebrow, .toc-label, .nav-count, .masthead-row span, .sec-num {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mute-2);
+}
+
+/* masthead */
+.masthead { border-bottom: 1px solid var(--line); }
+.masthead-row {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.crumbs {
+  padding: 12px 0;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+.crumbs a { color: var(--mute-2); }
+
+/* intro / hero */
+.intro { padding: var(--pad-section) 0 calc(var(--pad-section) * 0.6); border-bottom: 1px solid var(--line); }
+.lede { max-width: 68ch; color: var(--text); font-size: 1.08rem; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-family: var(--mono); font-weight: 700; text-decoration: none;
+  padding: 0.85em 1.4em; border: 1px solid var(--line-2);
+  font-size: 0.85rem; letter-spacing: 0.02em;
+}
+.btn-primary { background: var(--paper); color: var(--paper-ink); border-color: var(--paper); }
+.btn-primary:hover { background: var(--text-hi); color: var(--paper-ink); }
+.btn-ghost { background: transparent; color: var(--text-hi); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.6em; }
+
+/* hairline section framing */
+section { border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+.section-inner { padding-top: var(--pad-section); padding-bottom: var(--pad-section); }
+
+/* grid-of-cells */
+.cell-grid {
+  display: grid; gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+}
+.cell {
+  background: var(--ink-2);
+  padding: clamp(20px, 3vw, 32px);
+}
+.cell h3 { margin-bottom: 0.4em; }
+.cell p { color: var(--text); margin: 0; }
+.cell .num {
+  font-family: var(--mono); font-size: 2.6rem; font-weight: 700;
+  color: var(--line-2); line-height: 1; margin-bottom: 0.3em;
+}
+
+.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+table { border-collapse: collapse; width: 100%; }
+th, td {
+  text-align: left; padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--mute-2); }
+
+/* tool-reference specific */
+.layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--pad-x); align-items: start; padding-top: var(--pad-section); padding-bottom: var(--pad-section); }
+.toc { position: sticky; top: 24px; }
+.toc ul { list-style: none; margin: 0; padding: 0; }
+.toc li { border-bottom: 1px solid var(--line); }
+.toc a {
+  display: flex; justify-content: space-between; gap: 8px;
+  padding: 10px 0; text-decoration: none; color: var(--text);
+  font-family: var(--mono); font-size: 0.82rem;
+}
+.toc a:hover { color: var(--accent); }
+.nav-count { color: var(--mute); }
+
+.tool-group { margin-bottom: var(--pad-section); scroll-margin-top: 20px; }
+.tool-group h2 { display: flex; align-items: baseline; gap: 0.5em; border-bottom: 1px solid var(--line); padding-bottom: 0.5em; margin-bottom: 1em; }
+.sec-num { color: var(--mute-2); }
+.tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.tool-card { background: var(--ink-2); padding: 20px 24px; scroll-margin-top: 20px; min-width: 0; }
+.tool-card h3 { margin-bottom: 0.5em; }
+.tool-card p { margin: 0 0 0.9em; color: var(--text); font-size: 0.92rem; }
+table.params { font-size: 0.82rem; table-layout: fixed; }
+table.params td, table.params th { overflow-wrap: break-word; }
+table.params td:first-child, table.params th:first-child { width: 42%; }
+table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-space: nowrap; }
+.no-params { color: var(--mute); font-family: var(--mono); font-size: 0.8rem; margin: 0; }
+
+.site-footer { border-top: 1px solid var(--line); border-bottom: none; }
+.site-footer .wrap { padding-top: 32px; padding-bottom: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+.fine { color: var(--mute); font-size: 0.82rem; margin: 0; }
+
+@media (max-width: 860px) {
+  .cols-2, .cols-3, .cols-5, .tool-grid { grid-template-columns: minmax(0, 1fr); }
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .toc { position: static; }
+  .btn-row { flex-direction: column; align-items: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-row">
+      <span>CLASSIFICATION: PUBLIC</span>
+      <span>LICENCE: PROPRIETARY</span>
+      <span>DOC-ID: TOOL-REF-35</span>
+      <span>REV 1.0.0</span>
+    </div>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">jgs-sysmlv2-api-mcp</a> <span aria-hidden="true">/</span> Tool Reference
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <section class="intro">
+    <div class="wrap">
+      <p class="eyebrow">&sect;00: TOOL REFERENCE</p>
+      <h1>All 35 tools, generated from the live registry</h1>
+      <p class="lede">This page lists every MCP tool jgs-sysmlv2-api-mcp registers, with its
+      parameters and which ones are required. It is generated directly from
+      <code>build_server().tool_specs()</code> by <code>scripts/gen_tool_reference_html.py</code>,
+      the same registry that produces <code>docs/TOOL-REFERENCE.md</code>, so this page and the
+      server can never drift apart. Full workflow walkthroughs live in
+      <code>docs/usage.md</code>; this page is the parameter-level lookup.</p>
+    </div>
+  </section>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="Tool groups">
+      <p class="toc-label">JUMP TO</p>
+      <ul>
+          <li><a href="#navigation-reads">Navigation reads<span class="nav-count">12</span></a></li>
+          <li><a href="#staged-authoring-writes">Staged authoring writes<span class="nav-count">10</span></a></li>
+          <li><a href="#project-lifecycle">Project lifecycle<span class="nav-count">4</span></a></li>
+          <li><a href="#branch-and-tag-versioning">Branch and tag versioning<span class="nav-count">7</span></a></li>
+          <li><a href="#infrastructure">Infrastructure<span class="nav-count">2</span></a></li>
+      </ul>
+    </nav>
+    <div class="groups">
+      <section class="tool-group" id="navigation-reads">
+        <h2><span class="sec-num">§01</span> Navigation reads</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-get_project">
+            <h3><code>get_project</code></h3>
+            <p>Project metadata (name, description, default branch). Optional project_id overrides the configured project.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_root_elements">
+            <h3><code>get_root_elements</code></h3>
+            <p>Root (unowned) elements at a commit: the entry point into a model. Filtered client-side (the pilot&#x27;s /roots does not exclude owned elements). commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_children">
+            <h3><code>get_children</code></h3>
+            <p>One level of owned children with id/name/type. commit_id defaults to head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-find_by_name">
+            <h3><code>find_by_name</code></h3>
+            <p>Find elements by declaredName, optional type filter. commit_id defaults to head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>name</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>type</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_relationships">
+            <h3><code>get_relationships</code></h3>
+            <p>Typed relationship elements touching an element (matches explicit source/target). direction: in|out|both. commit_id defaults to head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>direction</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_commit">
+            <h3><code>get_commit</code></h3>
+            <p>Fetch a single commit record (previousCommit, description, created).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_commit_changes">
+            <h3><code>get_commit_changes</code></h3>
+            <p>Full DataVersion change records of a commit (deletions have payload null).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-get_commits">
+            <h3><code>get_commits</code></h3>
+            <p>List commits for the configured project. Order is not guaranteed to be newest-first (use resolve_head/get_commit for the actual head).</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+          <article class="tool-card" id="tool-get_element">
+            <h3><code>get_element</code></h3>
+            <p>Fetch a single element (raw JSON, full fidelity) at a commit. commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-query_elements">
+            <h3><code>query_elements</code></h3>
+            <p>Query elements at a commit with opaque-cursor pagination. commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>filter</code></td><td>object</td><td>no</td></tr>
+              <tr><td><code>cursor</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>page_size</code></td><td>integer</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-diff_commits">
+            <h3><code>diff_commits</code></h3>
+            <p>Diff two commits -&gt; {created, deleted, modified} element-id lists (client-side; pilot lacks native diff).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>base_commit</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>compare_commit</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-nav_traverse">
+            <h3><code>nav_traverse</code></h3>
+            <p>Traverse owned-member hierarchy from a root element (cycle-safe). commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>root</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>max_depth</code></td><td>integer</td><td>no</td></tr>
+              <tr><td><code>follow_relationships</code></td><td>boolean</td><td>no</td></tr>
+              <tr><td><code>include_names</code></td><td>boolean</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+      <section class="tool-group" id="staged-authoring-writes">
+        <h2><span class="sec-num">§02</span> Staged authoring writes</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-create_element">
+            <h3><code>create_element</code></h3>
+            <p>Stage creation of a new element under an owner (buffer-only).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>type</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>name</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>owner</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-modify_element">
+            <h3><code>modify_element</code></h3>
+            <p>Stage a modification to an existing element (buffer-only).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>changes</code></td><td>object</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-delete_element">
+            <h3><code>delete_element</code></h3>
+            <p>Stage deletion of a single element (buffer-only; refuses if it owns children).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-delete_subtree">
+            <h3><code>delete_subtree</code></h3>
+            <p>Stage deletion of an element and its owned subtree (buffer-only).</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-create_relationship">
+            <h3><code>create_relationship</code></h3>
+            <p>Stage a typed relationship (buffer-only). Sets explicit source/target plus the type&#x27;s concrete end fields (Subclassification, Specialization, Subsetting, Redefinition, FeatureTyping, Dependency); other types take concrete ends via properties.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>type</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>source</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>target</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>owner</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>properties</code></td><td>object</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-move_element">
+            <h3><code>move_element</code></h3>
+            <p>Stage a rehome of an element to a new owner (buffer-only; modifies its OwningMembership at the commit). commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>element_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>new_owner</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-stage_batch">
+            <h3><code>stage_batch</code></h3>
+            <p>Stage many operations atomically (all-or-nothing, buffer-only). Ops: {op: create|relate|modify|delete, ...}; create ops accept a caller-minted element_id so later ops in the batch can reference it.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>operations</code></td><td>array</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-review_changes">
+            <h3><code>review_changes</code></h3>
+            <p>Return the staged ops + a confirm token (must be reviewed before commit).</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+          <article class="tool-card" id="tool-commit_changes">
+            <h3><code>commit_changes</code></h3>
+            <p>Commit the staged buffer; requires a fresh confirm token.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>message</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>confirm</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-discard_changes">
+            <h3><code>discard_changes</code></h3>
+            <p>Discard the staged buffer without committing.</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+        </div>
+      </section>
+      <section class="tool-group" id="project-lifecycle">
+        <h2><span class="sec-num">§03</span> Project lifecycle</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-create_project">
+            <h3><code>create_project</code></h3>
+            <p>Create a project (name, optional description). The session stays bound to its configured project.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>name</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>description</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-update_project">
+            <h3><code>update_project</code></h3>
+            <p>Rename or re-describe a project. project_id defaults to the configured project. Only provided fields change.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>name</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>description</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-delete_project">
+            <h3><code>delete_project</code></h3>
+            <p>Delete a project (destructive; requires confirm: true). The session&#x27;s configured project is refused; outcome is verified via the project list.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>project_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>confirm</code></td><td>boolean</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-list_projects">
+            <h3><code>list_projects</code></h3>
+            <p>List projects visible to this API endpoint.</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+        </div>
+      </section>
+      <section class="tool-group" id="branch-and-tag-versioning">
+        <h2><span class="sec-num">§04</span> Branch and tag versioning</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-list_branches">
+            <h3><code>list_branches</code></h3>
+            <p>List branches (id, name, head commit). Optional project_id overrides the configured project.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-create_branch">
+            <h3><code>create_branch</code></h3>
+            <p>Create a branch. head_commit_id defaults to the session branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>name</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>head_commit_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-delete_branch">
+            <h3><code>delete_branch</code></h3>
+            <p>Delete a branch (destructive; requires confirm: true). Outcome is verified via the branch list; the default branch is refused.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>branch_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>confirm</code></td><td>boolean</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-merge_branch">
+            <h3><code>merge_branch</code></h3>
+            <p>Squash-merge a source branch onto a target branch as one commit (requires confirm: true). Refuses with conflicting element ids if both branches changed the same element.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>source_branch_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>target_branch_id</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>description</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>confirm</code></td><td>boolean</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-set_branch">
+            <h3><code>set_branch</code></h3>
+            <p>Retarget this session at a branch: staged commits and default read head follow it. Refused while staged work exists.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>branch_id</code></td><td>string</td><td>yes</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-list_tags">
+            <h3><code>list_tags</code></h3>
+            <p>List tags (name, tagged commit). Optional project_id overrides the configured project.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-create_tag">
+            <h3><code>create_tag</code></h3>
+            <p>Tag a commit (checkpoint). commit_id defaults to the session branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>name</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+      <section class="tool-group" id="infrastructure">
+        <h2><span class="sec-num">§05</span> Infrastructure</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-ping">
+            <h3><code>ping</code></h3>
+            <p>Minimal liveness probe: confirms the endpoint is reachable.</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+          <article class="tool-card" id="tool-stats">
+            <h3><code>stats</code></h3>
+            <p>Return a snapshot of server metrics counters.</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="index.html">&larr; Back to jgs-sysmlv2-api-mcp</a></p>
+    <p class="fine">Proprietary, copyright 2026 JG Systems Consulting Ltd. See
+    <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/LICENSE">LICENSE</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

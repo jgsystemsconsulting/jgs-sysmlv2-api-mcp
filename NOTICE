@@ -1,0 +1,16 @@
+jgs-sysmlv2-api-mcp
+Copyright (c) 2026 JG Systems Consulting Ltd.
+
+This product depends on the following third-party components, each under its
+own license:
+- sysml-v2-api-client (Systems-Modeling/SysML-v2-API-Python-Client), LGPL-3.0
+- mcp (Model Context Protocol Python SDK), MIT
+- httpx, BSD-3-Clause
+Third-party components are not distributed with this repository; they are
+installed from their upstream sources per the install instructions.
+
+The GitHub Pages landing pages (docs/index.html, docs/tool-reference.html)
+self-host the following fonts under docs/fonts/, each under the SIL Open
+Font License 1.1:
+- Inter (Rasmus Andersson and contributors)
+- JetBrains Mono (JetBrains s.r.o. and contributors)

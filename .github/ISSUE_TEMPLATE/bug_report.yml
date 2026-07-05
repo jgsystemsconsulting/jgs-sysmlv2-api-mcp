@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a defective tool result or server behaviour
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: From RELEASE-INFO.txt or the ping tool output
+    validations: {required: true}
+  - type: input
+    id: tool
+    attributes:
+      label: Tool name
+      description: Which MCP tool misbehaved (e.g. commit_changes)
+    validations: {required: true}
+  - type: textarea
+    id: repro
+    attributes:
+      label: What happened, and how to reproduce it
+      description: Tool arguments, expected vs actual result, API endpoint type (pilot or commercial)
+    validations: {required: true}
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Hygiene
+      options:
+        - label: I confirm this report contains no bearer tokens, keys, or credentials.
+          required: true

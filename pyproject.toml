@@ -1,0 +1,19 @@
+[project]
+name = "jgs-sysmlv2-api-mcp"
+version = "1.0.0"
+description = "Proprietary MCP server for the OMG SysML v2 REST API (staged-commit authoring)."
+requires-python = ">=3.11"
+dependencies = [
+    # official OpenAPI-generated client for the SysML v2 API (installed from git in the spike)
+    # "sysml-v2-api-client",  # pinned during Task 5; spike installs from git
+    "httpx>=0.27",
+    "mcp>=1.0",
+    "cryptography>=42",  # Ed25519 licence verification (licence.py)
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "nuitka>=2.4"]
+
+[tool.pytest.ini_options]
+markers = ["integration: needs a live SysML v2 API pilot"]
+pythonpath = ["src"]
