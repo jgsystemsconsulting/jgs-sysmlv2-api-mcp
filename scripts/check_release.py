@@ -13,7 +13,7 @@ REQUIRED = ["LICENSE", "COPYRIGHT", "NOTICE", "README.md", "CHANGELOG.md",
             "RELEASE-INFO.txt", "CITATION.cff", "SECURITY.md", ".gitignore",
             "pyproject.toml", "docs/install.md", "docs/configuration.md",
             "docs/licensing.md", "docs/usage.md", "docs/TOOL-REFERENCE.md",
-            "examples/mcp.json.example", "glama.json", "smithery.yaml",
+            "examples/.mcp.json.example", "glama.json", "smithery.yaml",
             ".claude-plugin/marketplace.json", ".claude-plugin/plugin.json",
             ".cursor-plugin/plugin.json", ".cursor-plugin/marketplace.json",
             ".agents/plugins/marketplace.json", "gemini-extension.json"]

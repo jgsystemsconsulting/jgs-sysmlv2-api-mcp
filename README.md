@@ -40,14 +40,14 @@ The server exposes 35 tools across five areas: navigation reads, staged authorin
 
 ```
 Repository: https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp
-Version:    v1.0.0
+Version:    v1.0.1
 
 Install:
   pip install -e .
   pip install "git+https://github.com/Systems-Modeling/SysML-v2-API-Python-Client.git"
 
 Human step (cannot be automated): add this server to your MCP client's
-config (see examples/mcp.json.example) and restart the client so it
+config (see examples/.mcp.json.example) and restart the client so it
 picks up the new server.
 ```
 
@@ -78,4 +78,4 @@ The full spike results, design decisions, and tier-by-tier implementation histor
 
 ## Version
 
-Current release: **v1.0.0**. See `CHANGELOG.md` for what changed.
+Current release: **v1.0.1**. See `CHANGELOG.md` for what changed.

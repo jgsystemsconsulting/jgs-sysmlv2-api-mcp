@@ -1,6 +1,6 @@
 Product: jgs-sysmlv2-api-mcp
 Version: 1.0.1
-Built:   2026-07-05T09:09:18Z
+Built:   2026-07-05T09:14:05Z
 Tag:     v1.0.1
-Source SHA: 9fd039c32ad6b8d874eb6ee7bf72c2518c850b92
+Source SHA: 80c3f9295f50ca87df9951b6a2c893950045b0e9
 Vendor:  JG Systems Consulting Ltd.

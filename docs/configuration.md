@@ -33,9 +33,9 @@ Two further limits are fixed in code rather than read from the environment, but 
 
 This closes the obvious ways to point the server at an internal service over plaintext: a DNS name that resolves to a non-loopback address, a decimal or hex-encoded IP literal, or a link-local address are all rejected. In practice this means `http://localhost:9000` and `http://127.0.0.1:9000` work for local development, and anything reaching outside your machine must use `https://`.
 
-## `examples/mcp.json.example`
+## `examples/.mcp.json.example`
 
-The repository ships an example MCP client configuration at `examples/mcp.json.example`:
+The repository ships an example MCP client configuration at `examples/.mcp.json.example`:
 
 ```json
 {
@@ -55,7 +55,7 @@ The repository ships an example MCP client configuration at `examples/mcp.json.e
 
 To use it: copy the file to wherever your MCP client reads server configs from (for example `.mcp.json` in a project root, or your client's global config location), rename it by dropping the `.example` suffix, and fill in the three placeholder values. Add `SYSMLV2_BRANCH` to the `env` block if you want the session to start on a specific branch rather than the project's default.
 
-Do not commit the filled-in file. Keep the token out of version control entirely; treat `examples/mcp.json.example` as the template and your real config as local, untracked state.
+Do not commit the filled-in file. Keep the token out of version control entirely; treat `examples/.mcp.json.example` as the template and your real config as local, untracked state.
 
 ## Branch pinning: `SYSMLV2_BRANCH` vs. `set_branch`
 
