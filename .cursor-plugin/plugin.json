@@ -1,0 +1,9 @@
+{
+  "name": "jgs-sysmlv2-api-mcp",
+  "description": "MCP server for the OMG SysML v2 REST API: 35 tools for navigating, versioning, and authoring SysML v2 models with staged, token-confirmed commits.",
+  "version": "1.0.0",
+  "author": "JG Systems Consulting Ltd.",
+  "homepage": "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp",
+  "repository": "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp",
+  "license": "LicenseRef-JGSC-Proprietary"
+}

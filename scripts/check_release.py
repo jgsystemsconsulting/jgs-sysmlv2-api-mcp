@@ -14,7 +14,9 @@ REQUIRED = ["LICENSE", "COPYRIGHT", "NOTICE", "README.md", "CHANGELOG.md",
             "pyproject.toml", "docs/install.md", "docs/configuration.md",
             "docs/licensing.md", "docs/usage.md", "docs/TOOL-REFERENCE.md",
             "examples/mcp.json.example", "glama.json", "smithery.yaml",
-            ".claude-plugin/marketplace.json", ".claude-plugin/plugin.json"]
+            ".claude-plugin/marketplace.json", ".claude-plugin/plugin.json",
+            ".cursor-plugin/plugin.json", ".cursor-plugin/marketplace.json",
+            ".agents/plugins/marketplace.json", "gemini-extension.json"]
 for f in REQUIRED:
     if not pathlib.Path(f).is_file():
         fails.append(f"required file missing: {f}")
@@ -48,11 +50,14 @@ SCAN_GLOBS = ["src/**/*.py", "tests/**/*.py", "docs/**/*.md", "docs/**/*.html",
 # scripts/*.py for coverage (the RR-B-14 hardening fix) must not have the gate
 # flag its own regex definitions as a self-inflicted false positive.
 SELF_PATH = pathlib.Path(__file__).resolve()
+# stage_release.py's own FORBIDDEN_SENTINELS list names these same patterns as
+# string literals (its leak check for the release payload) — not leaked content.
+EXEMPT_PATHS = {SELF_PATH, pathlib.Path("scripts/stage_release.py").resolve()}
 for g in SCAN_GLOBS:
     for path in pathlib.Path(".").glob(g):
         if path.is_relative_to("docs/dev"):
             continue
-        if path.resolve() == SELF_PATH:
+        if path.resolve() in EXEMPT_PATHS:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for rx in FORBIDDEN_CONTENT:

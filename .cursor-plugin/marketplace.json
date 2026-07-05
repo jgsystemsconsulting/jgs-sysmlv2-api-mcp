@@ -1,0 +1,14 @@
+{
+  "name": "jgs-sysmlv2-api-mcp",
+  "owner": { "name": "JG Systems Consulting Ltd." },
+  "metadata": {
+    "description": "MCP server for the OMG SysML v2 REST API: navigate, version, and author SysML v2 models from Cursor and any MCP agent, with staged, token-confirmed commits."
+  },
+  "plugins": [
+    {
+      "name": "jgs-sysmlv2-api-mcp",
+      "source": ".",
+      "description": "MCP server exposing a live SysML v2 API project to AI agents (FREE read tools / PRO authoring tools)."
+    }
+  ]
+}

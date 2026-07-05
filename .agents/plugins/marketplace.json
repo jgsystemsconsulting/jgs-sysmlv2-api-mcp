@@ -1,0 +1,13 @@
+{
+  "name": "jgs-sysmlv2-api-mcp",
+  "interface": { "displayName": "JGS SysML v2 API MCP" },
+  "plugins": [
+    {
+      "name": "jgs-sysmlv2-api-mcp",
+      "source": { "source": "local", "path": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "category": "Modeling",
+      "description": "MCP server exposing a live SysML v2 API project to AI agents (FREE read tools / PRO authoring tools)."
+    }
+  ]
+}

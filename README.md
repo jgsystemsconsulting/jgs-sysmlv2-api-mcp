@@ -51,6 +51,13 @@ config (see examples/mcp.json.example) and restart the client so it
 picks up the new server.
 ```
 
+This repo also ships host-native plugin manifests, so it can be discovered from inside a
+coding-agent host rather than hand-edited into an MCP config: Claude Code
+(`/plugin marketplace add jgsystemsconsulting/jgs-sysmlv2-api-mcp`), Cursor
+(`.cursor-plugin/`, point Cursor at this repo), OpenAI Codex CLI (`.agents/plugins/marketplace.json`,
+also read via the legacy `.claude-plugin/` path), and Gemini CLI
+(`gemini extensions install https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp`).
+
 ## License
 
 Proprietary, copyright 2026 JG Systems Consulting Ltd. See `LICENSE` for full terms and `docs/licensing.md` for a plain-language summary and how to request a license.
