@@ -2,8 +2,8 @@
 
 # Licensing
 
-`jgs-sysmlv2-api-mcp` ships as **`sysmlv2-api-pro`**: a compiled Windows binary
-whose authoring capability is unlocked by a licence file. This page covers the
+`jgs-sysmlv2-api-mcp` ships as **`sysmlv2-api-pro`**: a Python package whose
+authoring capability is unlocked by a licence file. This page covers the
 product licence. It does not change the source code's own terms (below).
 
 ## Source code vs. product licence: two different things
@@ -13,10 +13,9 @@ product licence. It does not change the source code's own terms (below).
   granted to use, copy, modify, merge, publish, distribute, sublicense, or
   sell it, in whole or in part, without prior written permission. See
   `LICENSE` at the repository root for the full terms.
-- **The compiled binary's write tools** are gated separately by a product
-  licence tier, described below. Buying or trialling a PRO licence does not
-  grant any right to the source code; it only unlocks authoring tools in the
-  binary you were given.
+- **The server's write tools** are gated separately by a product licence
+  tier, described below. Buying or trialling a PRO licence does not grant
+  any right to the source code; it only unlocks authoring tools at runtime.
 
 ## Tiers
 
@@ -40,7 +39,7 @@ a valid PRO-or-above licence.
 - The licence file is named **`jgsc-sysmlv2-api-pro.licence`**. At startup the
   server looks for it in this order, and **the first existing file wins**:
   1. The path in the `JGS_V2_API_LICENCE_PATH` environment variable, if set.
-  2. The directory containing the deployed executable.
+  2. The directory containing the running server's entry point.
   3. `~/.jgs-sysmlv2-api/`.
 
   A stale or invalid file at a higher-precedence location **shadows** a valid
