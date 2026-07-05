@@ -11,9 +11,4 @@ dependencies = [
     "cryptography>=42",  # Ed25519 licence verification (licence.py)
 ]
 
-[project.optional-dependencies]
-dev = ["pytest>=8.0", "nuitka>=2.4"]
 
-[tool.pytest.ini_options]
-markers = ["integration: needs a live SysML v2 API pilot"]
-pythonpath = ["src"]
