@@ -1,0 +1,35 @@
+name: Improvement
+description: Product gap that any user would hit
+labels: [improvement]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: From RELEASE-INFO.txt
+    validations: {required: true}
+  - type: input
+    id: component
+    attributes:
+      label: Tool / component
+      description: Tool name, docs page, or unknown
+    validations: {required: true}
+  - type: textarea
+    id: outcome_blocked
+    attributes:
+      label: Outcome the product could not enable
+      description: One or two sentences. No secrets, tokens, or private content.
+    validations: {required: true}
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: What should change, and why it helps every user rather than one setup.
+    validations: {required: true}
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Hygiene
+      options:
+        - label: I confirm this report contains no secrets, tokens, keys, or credentials.
+          required: true

@@ -2,7 +2,7 @@
 
 # Configuration
 
-The server is configured entirely through environment variables. There is no config file, and the bearer token must never be written into a committed file, including your MCP client's own config.
+The server is configured entirely through environment variables. There is no config file: the server reads environment variables, which you set in the `env` block of your MCP client config. Fill in the token in your copy of that config and never commit the filled-in file.
 
 ## Environment variables
 
@@ -18,6 +18,7 @@ Two more variables tune behavior but are not required:
 | Variable | Default | Meaning |
 |---|---|---|
 | `SYSMLV2_PAGE_SIZE` | `50` | Default page size for `query_elements` when the tool call does not specify one. |
+| `JGS_V2_API_LICENCE_PATH` | none | Optional full path to a PRO licence file, overriding the default search (entry-point directory, then `~/.jgs-sysmlv2-api/`). Works the same for the exe and a source checkout. Precedence and shadowing: [licensing.md](licensing.md). |
 
 Two further limits are fixed in code rather than read from the environment, but are worth knowing:
 
@@ -41,8 +42,7 @@ The repository ships an example MCP client configuration at `examples/.mcp.json.
 {
   "mcpServers": {
     "jgs-sysmlv2": {
-      "command": "python",
-      "args": ["-m", "jgs_sysmlv2_api_mcp"],
+      "command": "jgs-sysmlv2-api-mcp.exe",
       "env": {
         "SYSMLV2_BASE_URL": "https://your-sysmlv2-endpoint.example.com",
         "SYSMLV2_TOKEN": "YOUR_BEARER_TOKEN_HERE",
@@ -53,7 +53,7 @@ The repository ships an example MCP client configuration at `examples/.mcp.json.
 }
 ```
 
-To use it: copy the file to wherever your MCP client reads server configs from (for example `.mcp.json` in a project root, or your client's global config location), rename it by dropping the `.example` suffix, and fill in the three placeholder values. Add `SYSMLV2_BRANCH` to the `env` block if you want the session to start on a specific branch rather than the project's default.
+To use it: copy the file to wherever your MCP client reads server configs from (for example `.mcp.json` in a project root, or your client's global config location), rename it by dropping the `.example` suffix, and fill in the three placeholder values. Add `SYSMLV2_BRANCH` to the `env` block if you want the session to start on a specific branch rather than the project's default. If the exe's folder is not on your PATH, point `command` at the absolute path of `jgs-sysmlv2-api-mcp.exe`.
 
 Do not commit the filled-in file. Keep the token out of version control entirely; treat `examples/.mcp.json.example` as the template and your real config as local, untracked state.
 

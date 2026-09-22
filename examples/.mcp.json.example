@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "jgs-sysmlv2": {
-      "command": "python",
-      "args": ["-m", "jgs_sysmlv2_api_mcp"],
+      "command": "jgs-sysmlv2-api-mcp.exe",
       "env": {
         "SYSMLV2_BASE_URL": "https://your-sysmlv2-endpoint.example.com",
         "SYSMLV2_TOKEN": "YOUR_BEARER_TOKEN_HERE",

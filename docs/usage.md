@@ -35,6 +35,8 @@ Writes never touch the server directly. `create_element`, `modify_element`, `del
 
 The confirm token is bound to a fingerprint of the exact buffer contents. If you stage anything new after calling `review_changes`, the token no longer matches and `commit_changes` refuses it: you have to review again. This is deliberate. It means a commit can never include an operation that was not shown to you first.
 
+If the commit POST's response is lost after the request is sent, `commit_changes` reconciles the branch head and returns an outcome instead of a commit id: `landed` means the write applied and the committed operations were removed from the buffer (do not re-commit them), `not_landed` means nothing applied (re-review and commit again), and `indeterminate` means resolve the branch head later using the returned `expected_version`.
+
 ```mermaid
 sequenceDiagram
     participant Agent
@@ -83,3 +85,33 @@ Most sessions work inside a single project set once, at startup, via `SYSMLV2_PR
 4. **`delete_project`** deletes a project. It requires `confirm: true`, and it refuses to delete the session's own configured project as a safety rail: you cannot accidentally delete the ground you are standing on. Deletion outcome is verified against the project list rather than trusted blindly from the response.
 
 Project lifecycle tools are the one area where it is worth double-checking `project_id` before calling anything destructive, since `delete_project` and `update_project` both accept an explicit id that overrides the session default.
+
+## 5. Export and validate a model
+
+Three FREE-tier tools compose the same reads used in the sections above into ready-made outputs: a bulk export bundle, a structural defect report, and a quick diagram.
+
+1. **`export_project`** bundles project metadata, commit metadata, and every element at a commit into one JSON object: `{"project": ..., "commit": ..., "elements": [...]}`. It aggregates data you could already read one element at a time via `get_project`/`get_commit`/`get_elements`; it does not cross any new access boundary. `commit_id` defaults to the branch head.
+
+   ```
+   export_project()                            -> {"project": {...}, "commit": {...}, "elements": [...]}
+   export_project(commit_id="c-42")            -> same shape, pinned to a specific commit
+   ```
+
+2. **`validate_model`** runs client-side structural/referential checks over a commit's elements (duplicate `@id`, dangling `source`/`target` references, dangling `ownedMemberElement`/`owningRelatedElement` references, and containment cycles) and returns a flat defect list. It is not semantic, multiplicity, or constraint-language validation; those are explicitly out of scope.
+
+   ```
+   validate_model()                            -> {"defects": [...], "checked_elements": 214}
+   ```
+
+   Use it after a bulk change (e.g. a large `stage_batch` commit, or a merge) to catch corruption before you build on top of it.
+
+3. **`export_plantuml`** exports a commit's elements as PlantUML class-diagram text: elements become classes, containment becomes composition, `Subclassification`/`Specialization` becomes generalization, and other typed relationships become labelled associations. **This is this project's own simplified convention for quick visualization, not a replica of the SysML v2 pilot's `%viz` output**; it does not attempt the pilot's multi-mode (tree/state/action/sequence/composite) Java visitor or its custom stereotype syntax.
+
+   ```
+   export_plantuml()                           -> {"plantuml": "@startuml\nclass \"Engine\" as part_1 ...\n@enduml"}
+   ```
+
+   Paste the returned text into any PlantUML renderer to view the diagram.
+   The optional `root` parameter is accepted for interface symmetry with
+   other tools but does not yet scope the diagram: the current version
+   always emits the full commit's element set.

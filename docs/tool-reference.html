@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tool Reference: jgs-sysmlv2-api-mcp, all 35 MCP Tools</title>
-<meta name="description" content="Browsable reference for all 35 MCP tools in jgs-sysmlv2-api-mcp: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<title>Tool Reference: jgs-sysmlv2-api-mcp, all 39 MCP Tools</title>
+<meta name="description" content="Browsable reference for all 39 MCP tools in jgs-sysmlv2-api-mcp: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
 <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/tool-reference.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tool Reference: jgs-sysmlv2-api-mcp">
-<meta property="og:description" content="Browsable reference for all 35 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<meta property="og:description" content="Browsable reference for all 39 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
 <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/tool-reference.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tool Reference: jgs-sysmlv2-api-mcp">
-<meta name="twitter:description" content="Browsable reference for all 35 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
+<meta name="twitter:description" content="Browsable reference for all 39 MCP tools: parameters, required fields, and grouping by navigation, authoring, lifecycle, and versioning.">
 <style>
 /* Shared design tokens/components for docs/index.html and docs/tool-reference.html.
    Source of truth for both pages' visual system (RR-B-20/24). Theme: "engineering
@@ -236,7 +236,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
     <div class="masthead-row">
       <span>CLASSIFICATION: PUBLIC</span>
       <span>LICENCE: PROPRIETARY</span>
-      <span>DOC-ID: TOOL-REF-35</span>
+      <span>DOC-ID: TOOL-REF-39</span>
       <span>REV 1.0.0</span>
     </div>
     <nav class="crumbs" aria-label="Breadcrumb">
@@ -248,7 +248,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
   <section class="intro">
     <div class="wrap">
       <p class="eyebrow">&sect;00: TOOL REFERENCE</p>
-      <h1>All 35 tools, generated from the live registry</h1>
+      <h1>All 39 tools, generated from the live registry</h1>
       <p class="lede">This page lists every MCP tool jgs-sysmlv2-api-mcp registers, with its
       parameters and which ones are required. It is generated directly from
       <code>build_server().tool_specs()</code> by <code>scripts/gen_tool_reference_html.py</code>,
@@ -261,7 +261,8 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
     <nav class="toc" aria-label="Tool groups">
       <p class="toc-label">JUMP TO</p>
       <ul>
-          <li><a href="#navigation-reads">Navigation reads<span class="nav-count">12</span></a></li>
+          <li><a href="#navigation-reads">Navigation reads<span class="nav-count">13</span></a></li>
+          <li><a href="#export-and-validation">Export and validation<span class="nav-count">3</span></a></li>
           <li><a href="#staged-authoring-writes">Staged authoring writes<span class="nav-count">10</span></a></li>
           <li><a href="#project-lifecycle">Project lifecycle<span class="nav-count">4</span></a></li>
           <li><a href="#branch-and-tag-versioning">Branch and tag versioning<span class="nav-count">7</span></a></li>
@@ -347,8 +348,8 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
               </tbody>
             </table>
           </article>
-          <article class="tool-card" id="tool-get_commits">
-            <h3><code>get_commits</code></h3>
+          <article class="tool-card" id="tool-list_commits">
+            <h3><code>list_commits</code></h3>
             <p>List commits for the configured project. Order is not guaranteed to be newest-first (use resolve_head/get_commit for the actual head).</p>
             <p class="no-params">No parameters.</p>
           </article>
@@ -401,14 +402,58 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
               </tbody>
             </table>
           </article>
+          <article class="tool-card" id="tool-get_licence">
+            <h3><code>get_licence</code></h3>
+            <p>Report the current licence state (valid, reason, tier, customer, expires, days_remaining, expires_soon, seats, features, source) from the in-memory state loaded once at server start. Always available; shows why authoring is locked when unlicensed.</p>
+            <p class="no-params">No parameters.</p>
+          </article>
+        </div>
+      </section>
+      <section class="tool-group" id="export-and-validation">
+        <h2><span class="sec-num">§02</span> Export and validation</h2>
+        <div class="tool-grid">
+          <article class="tool-card" id="tool-export_project">
+            <h3><code>export_project</code></h3>
+            <p>Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements — not a new access boundary. commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-validate_model">
+            <h3><code>validate_model</code></h3>
+            <p>Run structural/referential validation over a commit&#x27;s elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only — no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
+          <article class="tool-card" id="tool-export_plantuml">
+            <h3><code>export_plantuml</code></h3>
+            <p>Export a commit&#x27;s elements as PlantUML text using a simplified, self-defined class-diagram convention (elements as classes, containment as composition, Subclassification/Specialization as generalization, other typed relationships as labelled associations). This is a simplified subset for quick visualization, not the full pilot %viz output. commit_id defaults to the branch head.</p>
+            <table class="params">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
+              <tbody>
+              <tr><td><code>commit_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>project_id</code></td><td>string</td><td>no</td></tr>
+              <tr><td><code>root</code></td><td>string</td><td>no</td></tr>
+              </tbody>
+            </table>
+          </article>
         </div>
       </section>
       <section class="tool-group" id="staged-authoring-writes">
-        <h2><span class="sec-num">§02</span> Staged authoring writes</h2>
+        <h2><span class="sec-num">§03</span> Staged authoring writes</h2>
         <div class="tool-grid">
           <article class="tool-card" id="tool-create_element">
             <h3><code>create_element</code></h3>
-            <p>Stage creation of a new element under an owner (buffer-only).</p>
+            <p>Stage creation of a new element under an owner (buffer-only). PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -420,7 +465,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-modify_element">
             <h3><code>modify_element</code></h3>
-            <p>Stage a modification to an existing element (buffer-only).</p>
+            <p>Stage a modification to an existing element (buffer-only). PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -431,7 +476,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-delete_element">
             <h3><code>delete_element</code></h3>
-            <p>Stage deletion of a single element (buffer-only; refuses if it owns children).</p>
+            <p>Stage deletion of a single element (buffer-only; refuses if it owns children). PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -441,7 +486,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-delete_subtree">
             <h3><code>delete_subtree</code></h3>
-            <p>Stage deletion of an element and its owned subtree (buffer-only).</p>
+            <p>Stage deletion of an element and its owned subtree (buffer-only). PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -451,7 +496,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-create_relationship">
             <h3><code>create_relationship</code></h3>
-            <p>Stage a typed relationship (buffer-only). Sets explicit source/target plus the type&#x27;s concrete end fields (Subclassification, Specialization, Subsetting, Redefinition, FeatureTyping, Dependency); other types take concrete ends via properties.</p>
+            <p>Stage a typed relationship (buffer-only). Sets explicit source/target plus the type&#x27;s concrete end fields (Subclassification, Specialization, Subsetting, Redefinition, FeatureTyping, Dependency); other types take concrete ends via properties. PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -465,7 +510,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-move_element">
             <h3><code>move_element</code></h3>
-            <p>Stage a rehome of an element to a new owner (buffer-only; modifies its OwningMembership at the commit). commit_id defaults to the branch head.</p>
+            <p>Stage a rehome of an element to a new owner (buffer-only; modifies its OwningMembership at the commit). commit_id defaults to the branch head. PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -477,7 +522,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-stage_batch">
             <h3><code>stage_batch</code></h3>
-            <p>Stage many operations atomically (all-or-nothing, buffer-only). Ops: {op: create|relate|modify|delete, ...}; create ops accept a caller-minted element_id so later ops in the batch can reference it.</p>
+            <p>Stage many operations atomically (all-or-nothing, buffer-only). Ops: {op: create|relate|modify|delete, ...}; create ops accept a caller-minted element_id so later ops in the batch can reference it. PRO tier, requires a licence.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -492,12 +537,12 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-commit_changes">
             <h3><code>commit_changes</code></h3>
-            <p>Commit the staged buffer; requires a fresh confirm token.</p>
+            <p>Commit the staged buffer; requires a fresh confirm token. PRO tier, requires a licence; applies immediately, no staging. If the POST response is lost after the request is sent, the server reconciles the branch head and returns one of three outcomes: landed (write applied; committed ops removed from the buffer; do not re-commit them), not_landed (nothing applied; re-review and commit again), or indeterminate (resolve the branch head later; expected_version is the head to look past).</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
               <tr><td><code>message</code></td><td>string</td><td>no</td></tr>
-              <tr><td><code>confirm</code></td><td>string</td><td>yes</td></tr>
+              <tr><td><code>confirm_token</code></td><td>string</td><td>yes</td></tr>
               </tbody>
             </table>
           </article>
@@ -509,11 +554,11 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
         </div>
       </section>
       <section class="tool-group" id="project-lifecycle">
-        <h2><span class="sec-num">§03</span> Project lifecycle</h2>
+        <h2><span class="sec-num">§04</span> Project lifecycle</h2>
         <div class="tool-grid">
           <article class="tool-card" id="tool-create_project">
             <h3><code>create_project</code></h3>
-            <p>Create a project (name, optional description). The session stays bound to its configured project.</p>
+            <p>Create a project (name, optional description). The session stays bound to its configured project. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -524,7 +569,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-update_project">
             <h3><code>update_project</code></h3>
-            <p>Rename or re-describe a project. project_id defaults to the configured project. Only provided fields change.</p>
+            <p>Rename or re-describe a project. project_id defaults to the configured project. Only provided fields change. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -536,7 +581,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-delete_project">
             <h3><code>delete_project</code></h3>
-            <p>Delete a project (destructive; requires confirm: true). The session&#x27;s configured project is refused; outcome is verified via the project list.</p>
+            <p>Delete a project (destructive; requires confirm: true). The session&#x27;s configured project is refused; outcome is verified via the project list. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -553,7 +598,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
         </div>
       </section>
       <section class="tool-group" id="branch-and-tag-versioning">
-        <h2><span class="sec-num">§04</span> Branch and tag versioning</h2>
+        <h2><span class="sec-num">§05</span> Branch and tag versioning</h2>
         <div class="tool-grid">
           <article class="tool-card" id="tool-list_branches">
             <h3><code>list_branches</code></h3>
@@ -567,7 +612,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-create_branch">
             <h3><code>create_branch</code></h3>
-            <p>Create a branch. head_commit_id defaults to the session branch head.</p>
+            <p>Create a branch. head_commit_id defaults to the session branch head. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -578,7 +623,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-delete_branch">
             <h3><code>delete_branch</code></h3>
-            <p>Delete a branch (destructive; requires confirm: true). Outcome is verified via the branch list; the default branch is refused.</p>
+            <p>Delete a branch (destructive; requires confirm: true). Outcome is verified via the branch list; the default branch is refused. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -589,7 +634,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-merge_branch">
             <h3><code>merge_branch</code></h3>
-            <p>Squash-merge a source branch onto a target branch as one commit (requires confirm: true). Refuses with conflicting element ids if both branches changed the same element.</p>
+            <p>Squash-merge a source branch onto a target branch as one commit (requires confirm: true). Refuses with conflicting element ids if both branches changed the same element. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -622,7 +667,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-create_tag">
             <h3><code>create_tag</code></h3>
-            <p>Tag a commit (checkpoint). commit_id defaults to the session branch head.</p>
+            <p>Tag a commit (checkpoint). commit_id defaults to the session branch head. PRO tier, requires a licence; applies immediately, no staging.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -634,7 +679,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
         </div>
       </section>
       <section class="tool-group" id="infrastructure">
-        <h2><span class="sec-num">§05</span> Infrastructure</h2>
+        <h2><span class="sec-num">§06</span> Infrastructure</h2>
         <div class="tool-grid">
           <article class="tool-card" id="tool-ping">
             <h3><code>ping</code></h3>

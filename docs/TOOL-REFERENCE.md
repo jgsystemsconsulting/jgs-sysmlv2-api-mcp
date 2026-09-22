@@ -6,23 +6,23 @@ Generated from the server's tool registry by scripts/gen_tool_reference.py.
 Do not edit by hand: regenerate after any tool change.
 
 
-36 tools.
+39 tools.
 
 
 ## `commit_changes`
 
-Commit the staged buffer; requires a fresh confirm token.
+Commit the staged buffer; requires a fresh confirm token. PRO tier, requires a licence; applies immediately, no staging. If the POST response is lost after the request is sent, the server reconciles the branch head and returns one of three outcomes: landed (write applied; committed ops removed from the buffer; do not re-commit them), not_landed (nothing applied; re-review and commit again), or indeterminate (resolve the branch head later; expected_version is the head to look past).
 
 
 | Parameter | Type | Required |
 |---|---|---|
 | `message` | string | no |
-| `confirm` | string | yes |
+| `confirm_token` | string | yes |
 
 
 ## `create_branch`
 
-Create a branch. head_commit_id defaults to the session branch head.
+Create a branch. head_commit_id defaults to the session branch head. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -33,7 +33,7 @@ Create a branch. head_commit_id defaults to the session branch head.
 
 ## `create_element`
 
-Stage creation of a new element under an owner (buffer-only).
+Stage creation of a new element under an owner (buffer-only). PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -45,7 +45,7 @@ Stage creation of a new element under an owner (buffer-only).
 
 ## `create_project`
 
-Create a project (name, optional description). The session stays bound to its configured project.
+Create a project (name, optional description). The session stays bound to its configured project. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -56,7 +56,7 @@ Create a project (name, optional description). The session stays bound to its co
 
 ## `create_relationship`
 
-Stage a typed relationship (buffer-only). Sets explicit source/target plus the type's concrete end fields (Subclassification, Specialization, Subsetting, Redefinition, FeatureTyping, Dependency); other types take concrete ends via properties.
+Stage a typed relationship (buffer-only). Sets explicit source/target plus the type's concrete end fields (Subclassification, Specialization, Subsetting, Redefinition, FeatureTyping, Dependency); other types take concrete ends via properties. PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -70,7 +70,7 @@ Stage a typed relationship (buffer-only). Sets explicit source/target plus the t
 
 ## `create_tag`
 
-Tag a commit (checkpoint). commit_id defaults to the session branch head.
+Tag a commit (checkpoint). commit_id defaults to the session branch head. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -81,7 +81,7 @@ Tag a commit (checkpoint). commit_id defaults to the session branch head.
 
 ## `delete_branch`
 
-Delete a branch (destructive; requires confirm: true). Outcome is verified via the branch list; the default branch is refused.
+Delete a branch (destructive; requires confirm: true). Outcome is verified via the branch list; the default branch is refused. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -92,7 +92,7 @@ Delete a branch (destructive; requires confirm: true). Outcome is verified via t
 
 ## `delete_element`
 
-Stage deletion of a single element (buffer-only; refuses if it owns children).
+Stage deletion of a single element (buffer-only; refuses if it owns children). PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -102,7 +102,7 @@ Stage deletion of a single element (buffer-only; refuses if it owns children).
 
 ## `delete_project`
 
-Delete a project (destructive; requires confirm: true). The session's configured project is refused; outcome is verified via the project list.
+Delete a project (destructive; requires confirm: true). The session's configured project is refused; outcome is verified via the project list. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -113,7 +113,7 @@ Delete a project (destructive; requires confirm: true). The session's configured
 
 ## `delete_subtree`
 
-Stage deletion of an element and its owned subtree (buffer-only).
+Stage deletion of an element and its owned subtree (buffer-only). PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -135,6 +135,29 @@ Diff two commits -> {created, deleted, modified} element-id lists (client-side; 
 ## `discard_changes`
 
 Discard the staged buffer without committing.
+
+
+## `export_plantuml`
+
+Export a commit's elements as PlantUML text using a simplified, self-defined class-diagram convention (elements as classes, containment as composition, Subclassification/Specialization as generalization, other typed relationships as labelled associations). This is a simplified subset for quick visualization, not the full pilot %viz output. commit_id defaults to the branch head.
+
+
+| Parameter | Type | Required |
+|---|---|---|
+| `commit_id` | string | no |
+| `project_id` | string | no |
+| `root` | string | no |
+
+
+## `export_project`
+
+Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements — not a new access boundary. commit_id defaults to the branch head.
+
+
+| Parameter | Type | Required |
+|---|---|---|
+| `commit_id` | string | no |
+| `project_id` | string | no |
 
 
 ## `find_by_name`
@@ -178,11 +201,6 @@ Full DataVersion change records of a commit (deletions have payload null).
 | Parameter | Type | Required |
 |---|---|---|
 | `commit_id` | string | yes |
-
-
-## `get_commits`
-
-List commits for the configured project. Order is not guaranteed to be newest-first (use resolve_head/get_commit for the actual head).
 
 
 ## `get_element`
@@ -243,6 +261,11 @@ List branches (id, name, head commit). Optional project_id overrides the configu
 | `project_id` | string | no |
 
 
+## `list_commits`
+
+List commits for the configured project. Order is not guaranteed to be newest-first (use resolve_head/get_commit for the actual head).
+
+
 ## `list_projects`
 
 List projects visible to this API endpoint.
@@ -260,7 +283,7 @@ List tags (name, tagged commit). Optional project_id overrides the configured pr
 
 ## `merge_branch`
 
-Squash-merge a source branch onto a target branch as one commit (requires confirm: true). Refuses with conflicting element ids if both branches changed the same element.
+Squash-merge a source branch onto a target branch as one commit (requires confirm: true). Refuses with conflicting element ids if both branches changed the same element. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -273,7 +296,7 @@ Squash-merge a source branch onto a target branch as one commit (requires confir
 
 ## `modify_element`
 
-Stage a modification to an existing element (buffer-only).
+Stage a modification to an existing element (buffer-only). PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -284,7 +307,7 @@ Stage a modification to an existing element (buffer-only).
 
 ## `move_element`
 
-Stage a rehome of an element to a new owner (buffer-only; modifies its OwningMembership at the commit). commit_id defaults to the branch head.
+Stage a rehome of an element to a new owner (buffer-only; modifies its OwningMembership at the commit). commit_id defaults to the branch head. PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -343,7 +366,7 @@ Retarget this session at a branch: staged commits and default read head follow i
 
 ## `stage_batch`
 
-Stage many operations atomically (all-or-nothing, buffer-only). Ops: {op: create|relate|modify|delete, ...}; create ops accept a caller-minted element_id so later ops in the batch can reference it.
+Stage many operations atomically (all-or-nothing, buffer-only). Ops: {op: create|relate|modify|delete, ...}; create ops accept a caller-minted element_id so later ops in the batch can reference it. PRO tier, requires a licence.
 
 
 | Parameter | Type | Required |
@@ -358,7 +381,7 @@ Return a snapshot of server metrics counters.
 
 ## `update_project`
 
-Rename or re-describe a project. project_id defaults to the configured project. Only provided fields change.
+Rename or re-describe a project. project_id defaults to the configured project. Only provided fields change. PRO tier, requires a licence; applies immediately, no staging.
 
 
 | Parameter | Type | Required |
@@ -366,3 +389,14 @@ Rename or re-describe a project. project_id defaults to the configured project. 
 | `project_id` | string | no |
 | `name` | string | no |
 | `description` | string | no |
+
+
+## `validate_model`
+
+Run structural/referential validation over a commit's elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only — no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.
+
+
+| Parameter | Type | Required |
+|---|---|---|
+| `commit_id` | string | no |
+| `project_id` | string | no |

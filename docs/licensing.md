@@ -2,8 +2,8 @@
 
 # Licensing
 
-`jgs-sysmlv2-api-mcp` ships as **`sysmlv2-api-pro`**: a Python package whose
-authoring capability is unlocked by a licence file. This page covers the
+`jgs-sysmlv2-api-mcp` ships as **`sysmlv2-api-pro`**: a Windows executable
+whose authoring capability is unlocked by a licence file. This page covers the
 product licence. It does not change the source code's own terms (below).
 
 ## Source code vs. product licence: two different things
@@ -42,6 +42,10 @@ a valid PRO-or-above licence.
   2. The directory containing the running server's entry point.
   3. `~/.jgs-sysmlv2-api/`.
 
+  With the Windows executable, the entry-point directory is the directory
+  containing the exe, so placing `jgsc-sysmlv2-api-pro.licence` next to the
+  exe works with no environment variable.
+
   A stale or invalid file at a higher-precedence location **shadows** a valid
   one lower down: the search does not fall through past the first file it
   finds, it selects that file and reports whatever reason it failed
@@ -78,6 +82,7 @@ Pricing for `sysmlv2-api-pro` has not yet been set. Contact
 ## Third-party components
 
 This project depends on the official SysML v2 API Python client and other
-open-source packages listed in `pyproject.toml`. Those dependencies retain
-their own licenses; using this software does not change the license terms of
-its dependencies.
+open-source packages. The shipped `NOTICE` file and `CITATION.cff`, both in
+this repository, carry the attribution. Those dependencies retain their own
+licenses; using this software does not change the license terms of its
+dependencies.

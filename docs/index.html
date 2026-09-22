@@ -20,7 +20,7 @@
   "name": "jgs-sysmlv2-api-mcp",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Cross-platform (Python 3.11+)",
-  "softwareVersion": "1.0.1",
+  "softwareVersion": "2.0.0",
   "description": "An MCP server that gives an AI agent read and write access to a live SysML v2 model through the vendor-neutral OMG SysML v2 REST API, using a staged-commit write model with confirm tokens.",
   "url": "https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/",
   "codeRepository": "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp",
@@ -240,7 +240,7 @@ th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; let
       <span>CLASSIFICATION: PUBLIC</span>
       <span>LICENCE: PROPRIETARY</span>
       <span>DOC-ID: JGS-SYSMLV2-API-MCP</span>
-      <span>REV 1.0.1</span>
+      <span>REV 2.0.0</span>
     </div>
   </div>
 </header>
@@ -256,7 +256,7 @@ th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; let
     SysML v2 implementation exposes.</p>
     <div class="btn-row">
       <a class="btn btn-primary" href="#install">Install &rarr;</a>
-      <a class="btn btn-ghost" href="tool-reference.html">Browse all 35 tools &rarr;</a>
+      <a class="btn btn-ghost" href="tool-reference.html">Browse all 39 tools &rarr;</a>
     </div>
   </div>
 </section>
@@ -316,7 +316,7 @@ th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; let
 <section id="tool-surface">
   <div class="section-inner wrap">
     <p class="eyebrow">&sect;03: THE TOOL SURFACE</p>
-    <h2>35 tools across five areas</h2>
+    <h2>39 tools across five areas</h2>
     <p class="lede">The full, generated list with parameters lives on the
     <a href="tool-reference.html">tool reference page</a>. Here is the shape of it.</p>
     <div class="cell-grid cols-2" style="margin-top: 1.6em;">
@@ -345,7 +345,7 @@ th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; let
     </div>
     <p class="lede" style="margin-top: 1.6em;">Rounding out the surface: <code>ping</code> and
     <code>stats</code> for infrastructure health and server metrics.</p>
-    <p style="margin-top: 1.2em;"><a class="btn btn-ghost" href="tool-reference.html">See the full 35-tool reference &rarr;</a></p>
+    <p style="margin-top: 1.2em;"><a class="btn btn-ghost" href="tool-reference.html">See the full 39-tool reference &rarr;</a></p>
   </div>
 </section>
 
@@ -368,13 +368,16 @@ th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; let
 <section id="install">
   <div class="section-inner wrap">
     <p class="eyebrow">&sect;05: INSTALL</p>
-    <h2>Two pip installs, three environment variables</h2>
-    <p class="lede">Requires Python 3.11 or later. The official SysML v2 API client is not on
-    PyPI, so it is installed straight from its GitHub source.</p>
-    <pre><code>pip install -e .
-pip install "git+https://github.com/Systems-Modeling/SysML-v2-API-Python-Client.git"</code></pre>
-    <p class="lede">See <code>docs/install.md</code> for the full prerequisites, a Docker recipe for
-    running the OMG reference pilot locally, and how to verify the install.</p>
+    <h2>One download, three environment variables</h2>
+    <p class="lede">Download <code>jgs-sysmlv2-api-mcp.exe</code> and
+    <code>SHA256SUMS.txt</code> from the Releases page and verify the checksum
+    before running the exe.</p>
+    <pre><code>Get-FileHash .\jgs-sysmlv2-api-mcp.exe -Algorithm SHA256</code></pre>
+    <p class="lede">Place the licence file next to the exe to unlock the PRO
+    authoring tools, set the three environment variables, and point your MCP
+    client at the exe. See <code>docs/install.md</code> for the full
+    walkthrough, a Docker recipe for running the OMG reference pilot locally,
+    creating your first project, and how to verify the install.</p>
   </div>
 </section>
 
@@ -382,14 +385,15 @@ pip install "git+https://github.com/Systems-Modeling/SysML-v2-API-Python-Client.
   <div class="section-inner wrap">
     <p class="eyebrow">&sect;06: FIRST RUN</p>
     <h2>Point your MCP client at it, then say hello</h2>
-    <p class="lede">Copy <code>examples/mcp.json.example</code> into your MCP client's config
+    <p class="lede">Copy <code>examples/.mcp.json.example</code> into your MCP client's config
     location (for example <code>.mcp.json</code> in a project root), drop the <code>.example</code>
-    suffix, and fill in your endpoint, token, and project UUID:</p>
+    suffix, fill in your endpoint, token, and project UUID, and point
+    <code>command</code> at the absolute exe path if the exe's folder is not on
+    your PATH:</p>
     <pre><code>{
   "mcpServers": {
     "jgs-sysmlv2": {
-      "command": "python",
-      "args": ["-m", "jgs_sysmlv2_api_mcp"],
+      "command": "C:\\path\\to\\jgs-sysmlv2-api-mcp.exe",
       "env": {
         "SYSMLV2_BASE_URL": "https://your-sysmlv2-endpoint.example.com",
         "SYSMLV2_TOKEN": "YOUR_BEARER_TOKEN_HERE",
@@ -442,10 +446,11 @@ pip install "git+https://github.com/Systems-Modeling/SysML-v2-API-Python-Client.
 </main>
 <footer class="site-footer">
   <div class="wrap">
-    <p><a href="tool-reference.html">Browse all 35 tools &rarr;</a></p>
+    <p><a href="tool-reference.html">Browse all 39 tools &rarr;</a></p>
     <p class="fine">Proprietary, copyright 2026 JG Systems Consulting Ltd. See
     <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/LICENSE">LICENSE</a>.
-    Current release v1.0.1, see
+    Licence enquiries: <a href="https://labs.jgsystemsconsulting.com/licensing.html">labs.jgsystemsconsulting.com/licensing.html</a>.
+    Current release v2.0.0, see
     <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/CHANGELOG.md">CHANGELOG</a>.</p>
   </div>
 </footer>

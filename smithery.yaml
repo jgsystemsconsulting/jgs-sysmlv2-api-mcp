@@ -5,20 +5,19 @@ startCommand:
   type: stdio
   configSchema:
     type: object
-    required: [SYSMLV2_BASE_URL, SYSMLV2_PROJECT]
+    required: [SYSMLV2_BASE_URL, SYSMLV2_TOKEN, SYSMLV2_PROJECT]
     properties:
       SYSMLV2_BASE_URL:
         type: string
         description: SysML v2 API endpoint (HTTPS, or http:// for loopback only)
       SYSMLV2_TOKEN:
         type: string
-        description: Bearer token (optional against an open local pilot)
+        description: Bearer token (required; on an open local pilot any non-empty placeholder works)
       SYSMLV2_PROJECT:
         type: string
         description: Project UUID the write buffer binds to
   commandFunction: |-
     (config) => ({
-      command: "python",
-      args: ["-m", "jgs_sysmlv2_api_mcp"],
+      command: "jgs-sysmlv2-api-mcp.exe",
       env: config
     })
