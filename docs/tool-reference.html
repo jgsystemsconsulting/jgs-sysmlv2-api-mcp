@@ -414,7 +414,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
         <div class="tool-grid">
           <article class="tool-card" id="tool-export_project">
             <h3><code>export_project</code></h3>
-            <p>Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements — not a new access boundary. commit_id defaults to the branch head.</p>
+            <p>Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements; it is not a new access boundary. commit_id defaults to the branch head.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>
@@ -425,7 +425,7 @@ table.params td:nth-child(3), table.params th:nth-child(3) { width: 26%; white-s
           </article>
           <article class="tool-card" id="tool-validate_model">
             <h3><code>validate_model</code></h3>
-            <p>Run structural/referential validation over a commit&#x27;s elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only — no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.</p>
+            <p>Run structural/referential validation over a commit&#x27;s elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only: no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.</p>
             <table class="params">
               <thead><tr><th>Parameter</th><th>Type</th><th>Required</th></tr></thead>
               <tbody>

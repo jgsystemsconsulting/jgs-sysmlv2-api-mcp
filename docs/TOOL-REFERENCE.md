@@ -151,7 +151,7 @@ Export a commit's elements as PlantUML text using a simplified, self-defined cla
 
 ## `export_project`
 
-Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements — not a new access boundary. commit_id defaults to the branch head.
+Bulk-export a project as a single JSON bundle (project metadata, commit metadata, all elements at a commit) for offline reasoning or backup. Aggregates data already readable one element at a time via get_project/get_commit/get_elements; it is not a new access boundary. commit_id defaults to the branch head.
 
 
 | Parameter | Type | Required |
@@ -393,7 +393,7 @@ Rename or re-describe a project. project_id defaults to the configured project. 
 
 ## `validate_model`
 
-Run structural/referential validation over a commit's elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only — no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.
+Run structural/referential validation over a commit's elements: duplicate @id, dangling source/target references, dangling ownedMemberElement/owningRelatedElement references, and containment cycles. Client-side checks only: no semantic/constraint/multiplicity validation. commit_id defaults to the branch head.
 
 
 | Parameter | Type | Required |
