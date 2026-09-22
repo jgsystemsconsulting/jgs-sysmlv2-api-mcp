@@ -23,6 +23,9 @@ are unchanged from 1.0.x.
   verify, licence placement, environment variables, MCP client wiring);
   source-checkout instructions for contributors live in the development
   repository.
+- `docs/index.html` and `docs/tool-reference.html` ship a self-hosted favicon
+  and, on `docs/index.html`, an in-page "JUMP TO" section nav, closing a
+  landing-page gap found in a release-repo-standard design-system audit.
 
 ### Fixed
 - `delete_subtree` now also drops staged creates inside the doomed subtree
@@ -53,6 +56,11 @@ are unchanged from 1.0.x.
 - Development automation: the validate workflow no longer installs the SysML
   v2 API client a second time alongside its declared install, so the
   development tree has one declared install path.
+- Development packaging: `mcp` is now pinned to `mcp>=1.0,<2.0` (previously
+  an unbounded `mcp>=1.0`), so a fresh install cannot silently resolve `mcp`
+  2.x, whose lowlevel `Server` dropped the decorator-based tool-registration
+  API (`@server.list_tools()`, `@server.call_tool()`) that the server and the
+  doc generators depend on.
 
 ## [1.0.2] - 2026-09-09
 
