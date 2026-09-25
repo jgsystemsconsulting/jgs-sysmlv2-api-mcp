@@ -11,9 +11,13 @@
 <meta property="og:title" content="jgs-sysmlv2-api-mcp: SysML v2 API access for AI agents">
 <meta property="og:description" content="An MCP server giving AI agents read and write access to a live SysML v2 model through the OMG SysML v2 REST API, with a staged, confirm-token commit model.">
 <meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/title-card.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="jgs-sysmlv2-api-mcp: SysML v2 API access for AI agents">
 <meta name="twitter:description" content="An MCP server giving AI agents read and write access to a live SysML v2 model through the OMG SysML v2 REST API, with a staged, confirm-token commit model.">
+<meta name="twitter:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/title-card.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -161,6 +165,17 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.6em; }
 
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.hero-card {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line-2); border-radius: 6px;
+}
+
 section { border-bottom: 1px solid var(--line); }
 section:last-of-type { border-bottom: none; }
 .section-inner { padding-top: var(--pad-section); padding-bottom: var(--pad-section); }
@@ -227,6 +242,7 @@ section { scroll-margin-top: 20px; }
 
 @media (max-width: 860px) {
   .cols-2, .cols-3, .cols-5 { grid-template-columns: minmax(0, 1fr); }
+  .intro-grid { grid-template-columns: minmax(0, 1fr); }
   .btn-row { flex-direction: column; align-items: stretch; }
   .step-list li { grid-template-columns: 1fr; gap: 8px; }
   .step-list li::before { grid-column: 1; grid-row: 1; }
@@ -256,14 +272,22 @@ section { scroll-margin-top: 20px; }
 <section class="intro">
   <div class="wrap">
     <p class="eyebrow">&sect;00: OVERVIEW</p>
-    <h1>Give an agent a live SysML v2 model, not a screenshot of one.</h1>
-    <p class="lede">jgs-sysmlv2-api-mcp is an MCP server that connects an AI agent directly to a
-    running SysML v2 API endpoint. It reads the model as it actually is and writes to it through a
-    staged, reviewable commit, using the same vendor-neutral OMG REST API that any conformant
-    SysML v2 implementation exposes.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="#install">Install &rarr;</a>
-      <a class="btn btn-ghost" href="tool-reference.html">Browse all 39 tools &rarr;</a>
+    <div class="intro-grid">
+      <div>
+        <h1>Give an agent a live SysML v2 model, not a screenshot of one.</h1>
+        <p class="lede">jgs-sysmlv2-api-mcp is an MCP server that connects an AI agent directly to a
+        running SysML v2 API endpoint. It reads the model as it actually is and writes to it through a
+        staged, reviewable commit, using the same vendor-neutral OMG REST API that any conformant
+        SysML v2 implementation exposes.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#install">Install &rarr;</a>
+          <a class="btn btn-ghost" href="tool-reference.html">Browse all 39 tools &rarr;</a>
+        </div>
+      </div>
+      <div>
+        <img class="hero-card" src="title-card.png" width="1280" height="720"
+             alt="Skill-overview title card for jgs-sysmlv2-api-mcp: MCP server giving AI agents read/write access to live SysML v2 models over the OMG REST API, with staged commits.">
+      </div>
     </div>
     <nav class="jump-to" aria-label="Page sections">
       <p class="toc-label">JUMP TO</p>
