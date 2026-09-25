@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0b'/%3E%3Ctext x='16' y='24' font-family='monospace' font-weight='700' font-size='22' fill='%23f4f2ec' text-anchor='middle'%3E%C2%A7%3C/text%3E%3C/svg%3E">
+<meta name="color-scheme" content="dark">
 <title>JGS SysML v2 API MCP: SysML v2 API access for AI agents</title>
 <meta name="description" content="An MCP server giving AI agents read and write access to a live SysML v2 model through the OMG SysML v2 REST API, with a staged, confirm-token commit model.">
 <link rel="canonical" href="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="site.css">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/">
 <meta property="og:title" content="JGS SysML v2 API MCP">
 <meta property="og:description" content="An MCP server giving AI agents read and write access to a live SysML v2 model through the OMG SysML v2 REST API, with a staged, confirm-token commit model.">
-<meta property="og:url" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/">
-<meta property="og:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/title-card.png">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="720">
+<meta property="og:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/images/og/og-sysmlv2-api-mcp-1200.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="JGS SysML v2 API MCP">
 <meta name="twitter:description" content="An MCP server giving AI agents read and write access to a live SysML v2 model through the OMG SysML v2 REST API, with a staged, confirm-token commit model.">
-<meta name="twitter:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/title-card.png">
+<meta name="twitter:image" content="https://jgsystemsconsulting.github.io/jgs-sysmlv2-api-mcp/images/og/og-sysmlv2-api-mcp-1200.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,407 +35,160 @@
     "@type": "Organization",
     "name": "JG Systems Consulting Ltd"
   },
-  "license": "https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/LICENSE"
+  "license": "https://labs.jgsystemsconsulting.com/licensing.html"
 }
 </script>
 <style>
-/* Shared design tokens/components for docs/index.html and docs/tool-reference.html.
-   Source of truth for both pages' visual system (RR-B-20/24). Theme: "engineering
-   drafting document" per ~/.claude/skills/release-repo-standard/references/design-system.md. */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('fonts/jetbrains-mono-400.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('fonts/jetbrains-mono-700.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('fonts/inter-400.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('fonts/inter-600.woff2') format('woff2');
-}
-
-:root {
-  --ink:   #0a0a0b; --ink-2: #111113; --ink-3: #16171a; --ink-4: #1e2024;
-  --line:  #2a2d33; --line-2: #3a3e46;
-  --mute:  #767b80; --mute-2: #8b9099;
-  --text:  #c7ccd3; --text-hi: #e8ebf0;
-  --paper: #f4f2ec; --paper-ink: #0a0a0b;
-  --accent: #7db8ff;
-  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --pad-x: clamp(24px, 4vw, 80px);
-  --pad-section: clamp(48px, 6vw, 96px);
-}
-
-* { box-sizing: border-box; }
-html { color-scheme: dark; }
-body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 1rem;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-.wrap { max-width: 1200px; margin: 0 auto; padding-left: var(--pad-x); padding-right: var(--pad-x); }
-
+/* Accessibility hook: skip link is the one element family site.css does not carry. */
 .skip-link {
   position: absolute; left: -9999px; top: 0; z-index: 100;
   background: var(--paper); color: var(--paper-ink);
   padding: 12px 20px; font-family: var(--mono); font-weight: 700;
 }
 .skip-link:focus { left: var(--pad-x); top: 12px; }
-
-a { color: var(--text-hi); }
-a:hover { color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-code {
-  font-family: var(--mono);
-  font-size: 0.9em;
-  background: var(--ink-3);
-  border: 1px solid var(--line);
-  padding: 0.1em 0.4em;
-}
-pre {
-  font-family: var(--mono);
-  background: var(--ink-2);
-  border: 1px solid var(--line);
-  padding: 20px;
-  overflow-x: auto;
-  font-size: 0.85rem;
-  line-height: 1.55;
-}
-pre code { background: none; border: none; padding: 0; }
-
-h1, h2, h3 {
-  font-family: var(--mono);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text-hi);
-  margin: 0 0 0.5em;
-}
-h1 { font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.15; }
-h2 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
-h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
-
-.eyebrow, .toc-label, .nav-count, .masthead-row span, .sec-num {
-  font-family: var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: var(--mute-2);
-}
-
-.masthead { border-bottom: 1px solid var(--line); }
-.masthead-row {
-  display: flex; flex-wrap: wrap; gap: 20px;
-  padding: 14px 0;
-}
-
-.intro { padding: var(--pad-section) 0 calc(var(--pad-section) * 0.6); border-bottom: 1px solid var(--line); }
-.lede { max-width: 68ch; color: var(--text); font-size: 1.08rem; }
-
-.btn {
-  display: inline-flex; align-items: center; gap: 0.5em;
-  font-family: var(--mono); font-weight: 700; text-decoration: none;
-  padding: 0.85em 1.4em; border: 1px solid var(--line-2);
-  font-size: 0.85rem; letter-spacing: 0.02em;
-}
-.btn-primary { background: var(--paper); color: var(--paper-ink); border-color: var(--paper); }
-.btn-primary:hover { background: var(--text-hi); color: var(--paper-ink); }
-.btn-ghost { background: transparent; color: var(--text-hi); }
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.6em; }
-
-.intro-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: clamp(24px, 4vw, 56px);
-  align-items: center;
-}
-.hero-card {
-  display: block; width: 100%; height: auto;
-  border: 1px solid var(--line-2); border-radius: 6px;
-}
-
-section { border-bottom: 1px solid var(--line); }
-section:last-of-type { border-bottom: none; }
-.section-inner { padding-top: var(--pad-section); padding-bottom: var(--pad-section); }
-
-.cell-grid {
-  display: grid; gap: 1px; background: var(--line);
-  border: 1px solid var(--line);
-}
-.cell {
-  background: var(--ink-2);
-  padding: clamp(20px, 3vw, 32px);
-}
-.cell h3 { margin-bottom: 0.4em; }
-.cell p { color: var(--text); margin: 0; }
-.cell .num {
-  font-family: var(--mono); font-size: 2.6rem; font-weight: 700;
-  color: var(--line-2); line-height: 1; margin-bottom: 0.3em;
-}
-
-.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-
-table { border-collapse: collapse; width: 100%; }
-th, td {
-  text-align: left; padding: 8px 12px;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.9rem;
-}
-th { font-family: var(--mono); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--mute-2); }
-
-.site-footer { border-top: 1px solid var(--line); border-bottom: none; }
-.site-footer .wrap { padding-top: 32px; padding-bottom: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
-.fine { color: var(--mute); font-size: 0.82rem; margin: 0; }
-
-.step-list { list-style: none; margin: 0; padding: 0; counter-reset: step; }
-.step-list li {
-  counter-increment: step;
-  display: grid; grid-template-columns: 3rem 1fr; grid-template-rows: auto auto; gap: 4px 20px;
-  padding: 24px 0; border-bottom: 1px solid var(--line);
-}
-.step-list li:last-child { border-bottom: none; }
-.step-list li::before {
-  content: counter(step, decimal-leading-zero);
-  font-family: var(--mono); font-weight: 700; font-size: 2rem;
-  color: var(--line-2); line-height: 1;
-  grid-column: 1; grid-row: 1 / 3;
-}
-.step-list h3 { grid-column: 2; grid-row: 1; margin-bottom: 0.35em; }
-.step-list p { grid-column: 2; grid-row: 2; margin: 0; }
-
-.badge {
-  display: inline-block; font-family: var(--mono); font-size: 0.7rem;
-  text-transform: uppercase; letter-spacing: 0.08em;
-  border: 1px solid var(--line-2); color: var(--mute-2);
-  padding: 0.2em 0.6em; margin: 0 8px 8px 0;
-}
-a.badge { text-decoration: none; }
-a.badge:hover { border-color: var(--accent); color: var(--accent); }
-
-.jump-to { margin-top: 2em; padding-top: 1.6em; border-top: 1px solid var(--line); }
-.chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0.8em; }
-section { scroll-margin-top: 20px; }
-
-@media (max-width: 860px) {
-  .cols-2, .cols-3, .cols-5 { grid-template-columns: minmax(0, 1fr); }
-  .intro-grid { grid-template-columns: minmax(0, 1fr); }
-  .btn-row { flex-direction: column; align-items: stretch; }
-  .step-list li { grid-template-columns: 1fr; gap: 8px; }
-  .step-list li::before { grid-column: 1; grid-row: 1; }
-  .step-list h3 { grid-column: 1; grid-row: 2; }
-  .step-list p { grid-column: 1; grid-row: 3; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="masthead">
-  <div class="wrap">
-    <div class="masthead-row">
-      <span>CLASSIFICATION: PUBLIC</span>
-      <span>LICENCE: PROPRIETARY</span>
-      <span>DOC-ID: JGS-SYSMLV2-API-MCP</span>
-      <span>REV 2.0.0</span>
-    </div>
-  </div>
-</header>
+
+<header class="masthead"><div class="wrap">
+  <span>CLASSIFICATION: <b>PUBLIC</b></span>
+  <span>LICENCE: <b>Proprietary</b></span>
+  <span>DOC-ID: <b>JGS-SYSMLV2-API-MCP</b></span>
+  <span>REV <b>2.0.0</b></span>
+</div></header>
+
+<nav class="site" aria-label="Site"><div class="wrap">
+  <a href="#what-it-is">What it is</a>
+  <a href="#staged-commit">Staged commit</a>
+  <a href="#tool-surface">Tool surface</a>
+  <a href="#hosts">Hosts</a>
+  <a href="#install">Install</a>
+  <a href="#first-run">First run</a>
+  <a href="#design-notes">Design notes</a>
+  <a href="tool-reference.html">Tool reference</a>
+  <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp">Repository</a>
+  <a href="https://labs.jgsystemsconsulting.com/licensing.html">Licensing</a>
+</div></nav>
+
 <main id="main">
 
-<section class="intro">
-  <div class="wrap">
-    <p class="eyebrow">&sect;00: OVERVIEW</p>
-    <div class="intro-grid">
-      <div>
-        <h1>Give an agent a live SysML v2 model, not a screenshot of one.</h1>
-        <p class="lede">jgs-sysmlv2-api-mcp is an MCP server that connects an AI agent directly to a
-        running SysML v2 API endpoint. It reads the model as it actually is and writes to it through a
-        staged, reviewable commit, using the same vendor-neutral OMG REST API that any conformant
-        SysML v2 implementation exposes.</p>
-        <div class="btn-row">
-          <a class="btn btn-primary" href="#install">Install &rarr;</a>
-          <a class="btn btn-ghost" href="tool-reference.html">Browse all 39 tools &rarr;</a>
-        </div>
-      </div>
-      <div>
-        <img class="hero-card" src="title-card.png" width="1280" height="720"
-             alt="Skill-overview title card for jgs-sysmlv2-api-mcp: MCP server giving AI agents read/write access to live SysML v2 models over the OMG REST API, with staged commits.">
-      </div>
+<div class="hero"><div class="wrap">
+  <h1>JGS SysML v2 API MCP</h1>
+  <p>Give an agent a live SysML v2 model, not a screenshot of one.</p>
+  <p class="sub">jgs-sysmlv2-api-mcp is an MCP server that connects an AI agent directly to a
+  running SysML v2 API endpoint. It reads the model as it actually is and writes to it through a
+  staged, reviewable commit, using the same vendor-neutral OMG REST API that any conformant
+  SysML v2 implementation exposes.</p>
+  <div class="cta">
+    <a class="btn btn-primary" href="#install">Install <span aria-hidden="true">&rarr;</span></a>
+    <a class="btn btn-ghost" href="tool-reference.html">Browse all 39 tools <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <img src="title-card.png" width="1280" height="720"
+       alt="Skill-overview title card for jgs-sysmlv2-api-mcp: MCP server giving AI agents read/write access to live SysML v2 models over the OMG REST API, with staged commits."
+       style="display:block;max-width:100%;height:auto;border:1px solid var(--line);margin-top:2rem">
+</div></div>
+
+<section id="what-it-is"><div class="wrap">
+  <div class="shead"><span class="label">&sect;01 &middot; What it is, who it's for</span><h2>The bridge between an agent and a headless SysML v2 repository</h2></div>
+  <p class="lead">This server talks to any conformant SysML v2 API endpoint: the OMG reference
+  pilot, or a commercial implementation. There is no CATIA Magic, no desktop tool, no GUI in the
+  loop. If your systems model already lives in a headless SysML v2 API repository, and you want
+  an AI agent to explore it, extend it, or restructure it directly, this is that bridge.</p>
+  <p class="lead" style="margin-top:1.5rem">It is built for teams and individual engineers who want an agent working
+  directly against a SysML v2 API project: exploring an existing model, authoring new elements
+  and relationships, running parallel branches per agent session, or managing project lifecycle,
+  all through the standard API rather than a proprietary desktop integration.</p>
+  <p class="lead" style="margin-top:1.5rem">It is a companion to <code>jgs-magic-sysmlv2-mcp</code>, which drives a running
+  Cameo instance instead. Use this server when the model lives in a headless SysML v2 API
+  repository; use the Cameo bridge when it lives in a running Cameo desktop session.</p>
+</div></section>
+
+<section id="staged-commit"><div class="wrap">
+  <div class="shead"><span class="label">&sect;02 &middot; The staged-commit model</span><h2>Nothing reaches the API until you have seen what is about to be sent</h2></div>
+  <p class="lead">Writes never touch the server directly. <code>create_element</code>,
+  <code>modify_element</code>, <code>delete_element</code>, <code>delete_subtree</code>,
+  <code>create_relationship</code>, <code>move_element</code>, and <code>stage_batch</code> all
+  accumulate operations in an in-process buffer. The agent reviews the full staged batch and
+  receives a confirm token bound to a fingerprint of exactly what it is about to commit. Only
+  then does <code>commit_changes</code> post the batch as one atomic commit.</p>
+  <p class="lead" style="margin-top:1.5rem">If anything new is staged after the review step, the token no longer matches
+  and the commit is refused until the buffer is reviewed again. A commit can never include an
+  operation the agent was not shown first.</p>
+  <div class="grid g3" style="margin-top:1.5rem">
+    <div class="cell"><span class="num">01</span><h3>Stage</h3><p>Create, modify, delete, relate, move, or batch elements. Every call lands in the
+    session's own buffer, never on the server.</p></div>
+    <div class="cell"><span class="num">02</span><h3>Review</h3><p><code>review_changes</code> returns the full list of staged operations plus a confirm
+    token bound to that exact buffer.</p></div>
+    <div class="cell"><span class="num">03</span><h3>Commit or discard</h3><p><code>commit_changes</code> with the confirm token posts one atomic commit.
+    <code>discard_changes</code> drops the buffer with no trace if the agent changes its
+    mind.</p></div>
+  </div>
+</div></section>
+
+<section id="tool-surface"><div class="wrap">
+  <div class="shead"><span class="label">&sect;03 &middot; The tool surface</span><h2>39 tools across five areas</h2></div>
+  <p class="lead">The full, generated list with parameters lives on the
+  <a href="tool-reference.html">tool reference page</a>. Here is the shape of it.</p>
+  <div class="grid g2" style="margin-top:1.5rem">
+    <div class="cell">
+      <h3>Navigation reads</h3>
+      <p>Walk a model from its unowned roots down through owned children, sideways through
+      typed relationships, or by name lookup. Includes commit history, client-side diff between
+      two commits, and cursor-paginated queries.</p>
     </div>
-    <nav class="jump-to" aria-label="Page sections">
-      <p class="toc-label">JUMP TO</p>
-      <div class="chip-row">
-        <a class="badge" href="#what-it-is">&sect;01 What it is</a>
-        <a class="badge" href="#staged-commit">&sect;02 Staged commit</a>
-        <a class="badge" href="#tool-surface">&sect;03 Tool surface</a>
-        <a class="badge" href="#hosts">&sect;04 Hosts</a>
-        <a class="badge" href="#install">&sect;05 Install</a>
-        <a class="badge" href="#first-run">&sect;06 First run</a>
-        <a class="badge" href="#design-notes">&sect;07 Design notes</a>
-      </div>
-    </nav>
-  </div>
-</section>
-
-<section id="what-it-is">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;01: WHAT IT IS, WHO IT'S FOR</p>
-    <h2>The bridge between an agent and a headless SysML v2 repository</h2>
-    <p class="lede">This server talks to any conformant SysML v2 API endpoint: the OMG reference
-    pilot, or a commercial implementation. There is no CATIA Magic, no desktop tool, no GUI in the
-    loop. If your systems model already lives in a headless SysML v2 API repository, and you want
-    an AI agent to explore it, extend it, or restructure it directly, this is that bridge.</p>
-    <p class="lede">It is built for teams and individual engineers who want an agent working
-    directly against a SysML v2 API project: exploring an existing model, authoring new elements
-    and relationships, running parallel branches per agent session, or managing project lifecycle,
-    all through the standard API rather than a proprietary desktop integration.</p>
-    <p class="lede">It is a companion to <code>jgs-magic-sysmlv2-mcp</code>, which drives a running
-    Cameo instance instead. Use this server when the model lives in a headless SysML v2 API
-    repository; use the Cameo bridge when it lives in a running Cameo desktop session.</p>
-  </div>
-</section>
-
-<section id="staged-commit">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;02: THE STAGED-COMMIT MODEL</p>
-    <h2>Nothing reaches the API until you have seen what is about to be sent</h2>
-    <p class="lede">Writes never touch the server directly. <code>create_element</code>,
-    <code>modify_element</code>, <code>delete_element</code>, <code>delete_subtree</code>,
-    <code>create_relationship</code>, <code>move_element</code>, and <code>stage_batch</code> all
-    accumulate operations in an in-process buffer. The agent reviews the full staged batch and
-    receives a confirm token bound to a fingerprint of exactly what it is about to commit. Only
-    then does <code>commit_changes</code> post the batch as one atomic commit.</p>
-    <p class="lede">If anything new is staged after the review step, the token no longer matches
-    and the commit is refused until the buffer is reviewed again. A commit can never include an
-    operation the agent was not shown first.</p>
-    <ol class="step-list">
-      <li>
-        <h3>Stage</h3>
-        <p>Create, modify, delete, relate, move, or batch elements. Every call lands in the
-        session's own buffer, never on the server.</p>
-      </li>
-      <li>
-        <h3>Review</h3>
-        <p><code>review_changes</code> returns the full list of staged operations plus a confirm
-        token bound to that exact buffer.</p>
-      </li>
-      <li>
-        <h3>Commit or discard</h3>
-        <p><code>commit_changes</code> with the confirm token posts one atomic commit.
-        <code>discard_changes</code> drops the buffer with no trace if the agent changes its
-        mind.</p>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<section id="tool-surface">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;03: THE TOOL SURFACE</p>
-    <h2>39 tools across five areas</h2>
-    <p class="lede">The full, generated list with parameters lives on the
-    <a href="tool-reference.html">tool reference page</a>. Here is the shape of it.</p>
-    <div class="cell-grid cols-2" style="margin-top: 1.6em;">
-      <div class="cell">
-        <h3>Navigation reads</h3>
-        <p>Walk a model from its unowned roots down through owned children, sideways through
-        typed relationships, or by name lookup. Includes commit history, client-side diff between
-        two commits, and cursor-paginated queries.</p>
-      </div>
-      <div class="cell">
-        <h3>Staged authoring writes</h3>
-        <p>Create, modify, delete, relate, move, and batch elements into the buffer, then review
-        and commit as one atomic, confirm-token-gated operation.</p>
-      </div>
-      <div class="cell">
-        <h3>Project lifecycle</h3>
-        <p>Create, rename, redescribe, list, and verify-deleted projects. The session's own
-        configured project is refused as a delete target, so an agent cannot delete the ground it
-        is standing on.</p>
-      </div>
-      <div class="cell">
-        <h3>Branch and tag versioning</h3>
-        <p>Run one branch per agent session: create, retarget, diff, and squash-merge branches,
-        with tags as named checkpoints along the way.</p>
-      </div>
+    <div class="cell">
+      <h3>Staged authoring writes</h3>
+      <p>Create, modify, delete, relate, move, and batch elements into the buffer, then review
+      and commit as one atomic, confirm-token-gated operation.</p>
     </div>
-    <p class="lede" style="margin-top: 1.6em;">Rounding out the surface: <code>ping</code> and
-    <code>stats</code> for infrastructure health and server metrics.</p>
-    <p style="margin-top: 1.2em;"><a class="btn btn-ghost" href="tool-reference.html">See the full 39-tool reference &rarr;</a></p>
-  </div>
-</section>
-
-<section id="hosts">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;04: SUPPORTED HOSTS</p>
-    <h2>Any MCP client, Claude Code first</h2>
-    <p class="lede">The server speaks the standard MCP stdio protocol, so any MCP-compatible
-    client that can launch a local process can use it. It has been built and verified against
-    Claude Code; other clients that follow the same protocol, such as Claude Desktop, should work
-    the same way.</p>
-    <div>
-      <span class="badge">Claude Code</span>
-      <span class="badge">Claude Desktop</span>
-      <span class="badge">Any MCP-compatible client</span>
+    <div class="cell">
+      <h3>Project lifecycle</h3>
+      <p>Create, rename, redescribe, list, and verify-deleted projects. The session's own
+      configured project is refused as a delete target, so an agent cannot delete the ground it
+      is standing on.</p>
+    </div>
+    <div class="cell">
+      <h3>Branch and tag versioning</h3>
+      <p>Run one branch per agent session: create, retarget, diff, and squash-merge branches,
+      with tags as named checkpoints along the way.</p>
     </div>
   </div>
-</section>
+  <p class="lead" style="margin-top:1.5rem">Rounding out the surface: <code>ping</code> and
+  <code>stats</code> for infrastructure health and server metrics.</p>
+  <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="tool-reference.html">See the full 39-tool reference <span aria-hidden="true">&rarr;</span></a></p>
+</div></section>
 
-<section id="install">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;05: INSTALL</p>
-    <h2>One download, three environment variables</h2>
-    <p class="lede">Download <code>jgs-sysmlv2-api-mcp.exe</code> and
-    <code>SHA256SUMS.txt</code> from the Releases page and verify the checksum
-    before running the exe.</p>
-    <pre><code>Get-FileHash .\jgs-sysmlv2-api-mcp.exe -Algorithm SHA256</code></pre>
-    <p class="lede">Place the licence file next to the exe to unlock the PRO
-    authoring tools, set the three environment variables, and point your MCP
-    client at the exe. See <code>docs/install.md</code> for the full
-    walkthrough, a Docker recipe for running the OMG reference pilot locally,
-    creating your first project, and how to verify the install.</p>
-  </div>
-</section>
+<section id="hosts"><div class="wrap">
+  <div class="shead"><span class="label">&sect;04 &middot; Supported hosts</span><h2>Any MCP client, Claude Code first</h2></div>
+  <p class="lead">The server speaks the standard MCP stdio protocol, so any MCP-compatible
+  client that can launch a local process can use it. It has been built and verified against
+  Claude Code; other clients that follow the same protocol, such as Claude Desktop, should work
+  the same way.</p>
+  <p class="lead" style="margin-top:1.5rem"><code>Claude Code</code> &middot; <code>Claude Desktop</code> &middot; <code>Any MCP-compatible client</code></p>
+</div></section>
 
-<section id="first-run">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;06: FIRST RUN</p>
-    <h2>Point your MCP client at it, then say hello</h2>
-    <p class="lede">Copy <code>examples/.mcp.json.example</code> into your MCP client's config
-    location (for example <code>.mcp.json</code> in a project root), drop the <code>.example</code>
-    suffix, fill in your endpoint, token, and project UUID, and point
-    <code>command</code> at the absolute exe path if the exe's folder is not on
-    your PATH:</p>
-    <pre><code>{
+<section id="install"><div class="wrap">
+  <div class="shead"><span class="label">&sect;05 &middot; Install</span><h2>One download, three environment variables</h2></div>
+  <p class="lead">Download <code>jgs-sysmlv2-api-mcp.exe</code> and
+  <code>SHA256SUMS.txt</code> from the Releases page and verify the checksum
+  before running the exe.</p>
+  <div class="sheet" style="margin-top:1.5rem"><pre><code>Get-FileHash .\jgs-sysmlv2-api-mcp.exe -Algorithm SHA256</code></pre></div>
+  <p class="lead" style="margin-top:1.5rem">Place the licence file next to the exe to unlock the PRO
+  authoring tools, set the three environment variables, and point your MCP
+  client at the exe. See <code>docs/install.md</code> for the full
+  walkthrough, a Docker recipe for running the OMG reference pilot locally,
+  creating your first project, and how to verify the install.</p>
+</div></section>
+
+<section id="first-run"><div class="wrap">
+  <div class="shead"><span class="label">&sect;06 &middot; First run</span><h2>Point your MCP client at it, then say hello</h2></div>
+  <p class="lead">Copy <code>examples/.mcp.json.example</code> into your MCP client's config
+  location (for example <code>.mcp.json</code> in a project root), drop the <code>.example</code>
+  suffix, fill in your endpoint, token, and project UUID, and point
+  <code>command</code> at the absolute exe path if the exe's folder is not on
+  your PATH:</p>
+  <div class="sheet" style="margin-top:1.5rem"><pre><code>{
   "mcpServers": {
     "jgs-sysmlv2": {
       "command": "C:\\path\\to\\jgs-sysmlv2-api-mcp.exe",
@@ -444,58 +199,61 @@ section { scroll-margin-top: 20px; }
       }
     }
   }
-}</code></pre>
-    <p class="lede">Restart your MCP client so it picks up the new server. Then ask your agent to
-    call <code>ping</code>, the smallest tool in the registry. It does a live round trip to the
-    endpoint's commit list and reports whether the connection is healthy:</p>
-    <pre><code>{"up": true, "api_version": null, "commit_count": 0}</code></pre>
-    <p class="lede">If <code>ping</code> fails, recheck <code>SYSMLV2_BASE_URL</code> and
-    <code>SYSMLV2_TOKEN</code> first: nearly every install problem traces back to one of those
-    two. From there, <code>docs/usage.md</code> walks four full workflows: exploring a model you
-    did not build, authoring and committing a change, running one branch per agent session, and
-    managing a project's lifecycle.</p>
-  </div>
-</section>
+}</code></pre></div>
+  <p class="lead" style="margin-top:1.5rem">Restart your MCP client so it picks up the new server. Then ask your agent to
+  call <code>ping</code>, the smallest tool in the registry. It does a live round trip to the
+  endpoint's commit list and reports whether the connection is healthy:</p>
+  <div class="sheet" style="margin-top:1.5rem"><pre><code>{"up": true, "api_version": null, "commit_count": 0}</code></pre></div>
+  <p class="lead" style="margin-top:1.5rem">If <code>ping</code> fails, recheck <code>SYSMLV2_BASE_URL</code> and
+  <code>SYSMLV2_TOKEN</code> first: nearly every install problem traces back to one of those
+  two. From there, <code>docs/usage.md</code> walks four full workflows: exploring a model you
+  did not build, authoring and committing a change, running one branch per agent session, and
+  managing a project's lifecycle.</p>
+</div></section>
 
-<section id="design-notes">
-  <div class="section-inner wrap">
-    <p class="eyebrow">&sect;07: DESIGN NOTES</p>
-    <h2>Three ground-truth facts that shape the code</h2>
-    <p class="lede">Discovered by a day-one spike against the pilot, these decisions run through
-    the implementation:</p>
-    <div class="cell-grid cols-3" style="margin-top: 1.6em;">
-      <div class="cell">
-        <div class="num">01</div>
-        <h3>Commit body, not commit</h3>
-        <p>The commit POST body is a <code>CommitRequest</code>, not a <code>Commit</code>. There
-        is no client-supplied top-level id; the server assigns the commit id.</p>
-      </div>
-      <div class="cell">
-        <div class="num">02</div>
-        <h3>Raw JSON over typed models</h3>
-        <p>The official client's typed <code>Element</code> model drops <code>declaredName</code>
-        and other SysML payload fields, so reads go through a raw-JSON path instead.</p>
-      </div>
-      <div class="cell">
-        <div class="num">03</div>
-        <h3>Head by parentage, not list order</h3>
-        <p>The commit list is not guaranteed to be newest-first. Head is always resolved by
-        walking <code>previousCommit</code> parentage, never by trusting list order.</p>
-      </div>
+<section id="design-notes"><div class="wrap">
+  <div class="shead"><span class="label">&sect;07 &middot; Design notes</span><h2>Three ground-truth facts that shape the code</h2></div>
+  <p class="lead">Discovered by a day-one spike against the pilot, these decisions run through
+  the implementation:</p>
+  <div class="grid g3" style="margin-top:1.5rem">
+    <div class="cell">
+      <span class="num">01</span>
+      <h3>Commit body, not commit</h3>
+      <p>The commit POST body is a <code>CommitRequest</code>, not a <code>Commit</code>. There
+      is no client-supplied top-level id; the server assigns the commit id.</p>
+    </div>
+    <div class="cell">
+      <span class="num">02</span>
+      <h3>Raw JSON over typed models</h3>
+      <p>The official client's typed <code>Element</code> model drops <code>declaredName</code>
+      and other SysML payload fields, so reads go through a raw-JSON path instead.</p>
+    </div>
+    <div class="cell">
+      <span class="num">03</span>
+      <h3>Head by parentage, not list order</h3>
+      <p>The commit list is not guaranteed to be newest-first. Head is always resolved by
+      walking <code>previousCommit</code> parentage, never by trusting list order.</p>
     </div>
   </div>
-</section>
+</div></section>
 
 </main>
-<footer class="site-footer">
-  <div class="wrap">
-    <p><a href="tool-reference.html">Browse all 39 tools &rarr;</a></p>
-    <p class="fine">Proprietary, copyright 2026 JG Systems Consulting Ltd. See
-    <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/LICENSE">LICENSE</a>.
-    Licence enquiries: <a href="https://labs.jgsystemsconsulting.com/licensing.html">labs.jgsystemsconsulting.com/licensing.html</a>.
-    Current release v2.0.0, see
-    <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/CHANGELOG.md">CHANGELOG</a>.</p>
+
+<footer><div class="wrap">
+  <div class="tblock">
+    <div><span class="label">Product</span><b>jgs-sysmlv2-api-mcp</b></div>
+    <div><span class="label">Rev</span><b>2.0.0</b></div>
+    <div><span class="label">Licence</span><b>Proprietary</b></div>
+    <div><span class="label">Repository</span><b><a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp">github.com/jgsystemsconsulting</a></b></div>
+    <div><span class="label">Owner</span><b>JG Systems Consulting Ltd</b></div>
   </div>
-</footer>
+  <p class="foot-note">&copy; 2026 JG Systems Consulting Ltd. Proprietary. See
+  <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/LICENSE">LICENSE</a>.
+  To request a commercial or academic licence for JGSC Labs products, or if you are unsure which
+  licence you need, use <a href="https://labs.jgsystemsconsulting.com/licensing.html">labs.jgsystemsconsulting.com/licensing.html</a>.
+  Current release v2.0.0, see
+  <a href="https://github.com/jgsystemsconsulting/jgs-sysmlv2-api-mcp/blob/master/CHANGELOG.md">CHANGELOG</a>.</p>
+</div></footer>
+
 </body>
 </html>
